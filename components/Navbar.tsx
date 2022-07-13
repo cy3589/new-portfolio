@@ -16,6 +16,8 @@ import {
 import styled from '@emotion/styled';
 import { FC, ReactNode } from 'react';
 import { HamburgerIcon } from '@chakra-ui/icons';
+import Logo from '@components/Logo';
+import ThemeToggleButton from '@components/ThemeToggleButton';
 
 const StyledLink = styled(NextLlink)`
   &:hover {
@@ -65,7 +67,7 @@ const Navbar = (props: any) => {
       >
         <Flex align="center" mr={5}>
           <Heading as="h1" size="lg" letterSpacing="tight">
-            LOGO
+            <Logo />
           </Heading>
         </Flex>
         <Stack
@@ -87,6 +89,7 @@ const Navbar = (props: any) => {
         </Stack>
         <Menu>
           <Box>
+            <ThemeToggleButton />
             <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>
               <MenuButton as={IconButton} icon={<HamburgerIcon />} />
               <MenuList>
