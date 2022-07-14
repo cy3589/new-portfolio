@@ -1,4 +1,4 @@
-import NextLlink from 'next/link';
+import NextLink from 'next/link';
 import {
   Container,
   Box,
@@ -12,14 +12,17 @@ import {
   IconButton,
   useColorModeValue,
   MenuList,
+  LinkProps,
 } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { FC, ReactNode } from 'react';
 import { HamburgerIcon } from '@chakra-ui/icons';
+import { IoLogoGithub } from 'react-icons/io5';
+
 import Logo from '@components/Logo';
 import ThemeToggleButton from '@components/ThemeToggleButton';
 
-const StyledLink = styled(NextLlink)`
+const StyledLink = styled(NextLink)`
   &:hover {
     cursor: pointer;
   }
@@ -29,19 +32,28 @@ interface LinkItemProps {
   path: string;
   children: ReactNode | ReactNode[];
 }
-const LinkItem: FC<LinkItemProps> = ({ href, path, children }) => {
+const LinkItem: FC<LinkItemProps & LinkProps> = ({
+  href,
+  path,
+  target,
+  children,
+  ...props
+}) => {
   const active = path === href;
-  const inactiveColor = useColorModeValue('gray200', 'white');
+  const inactiveColor = useColorModeValue('gray200', 'whiteAlpha.900');
   return (
-    <StyledLink href={href}>
+    <NextLink href={href} passHref scroll={false}>
       <Link
+        _focus={{ boxShadow: '0 0 0 3px rgba(66, 153, 225, 0.6);' }}
         p={2}
-        bg={active ? 'red' : undefined}
+        bg={active ? 'grassTeal' : undefined}
         color={active ? '#202023' : inactiveColor}
+        target={target}
+        {...props}
       >
         {children}
       </Link>
-    </StyledLink>
+    </NextLink>
   );
 };
 
@@ -53,8 +65,8 @@ const Navbar = (props: any) => {
       as="nav"
       w="100%"
       bg={useColorModeValue('#FFFFFF40', '#20202380')}
-      style={{ backdropFilter: 'blur(100px)' }}
-      zIndex={1}
+      css={{ backdropFilter: 'blur(10px)' }}
+      zIndex={2}
       {...props}
     >
       <Container
@@ -66,7 +78,7 @@ const Navbar = (props: any) => {
         justifyContent="space-between"
       >
         <Flex align="center" mr={5}>
-          <Heading as="h1" size="lg" letterSpacing="tight">
+          <Heading as="h1" size="lg" letterSpacing="tighter">
             <Logo />
           </Heading>
         </Flex>
@@ -77,32 +89,51 @@ const Navbar = (props: any) => {
           flexGrow={1}
           mt={{ base: 4, nmd: 0 }}
         >
-          <LinkItem href="/posts" path={path}>
-            About
+          <LinkItem href="/works" path={path}>
+            Works
           </LinkItem>
-          <LinkItem href="/posts" path={path}>
+          <LinkItem href="/projects" path={path}>
             Projects
           </LinkItem>
-          <LinkItem href="/posts" path={path}>
+          <LinkItem href="/algorithm" path={path}>
             Algorithm
+          </LinkItem>
+          <LinkItem
+            href="https://github.com/cy3589/new-port-folio"
+            target="_blank"
+            path={path}
+            display="inline-flex"
+            alignItems="center"
+            style={{ gap: 4 }}
+            pl={2}
+            rel="noreferrer"
+          >
+            <IoLogoGithub />
+            Git
           </LinkItem>
         </Stack>
         <Menu>
           <Box>
             <ThemeToggleButton />
             <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>
-              <MenuButton as={IconButton} icon={<HamburgerIcon />} />
-              <MenuList>
-                <StyledLink href="/" passHref>
-                  <MenuItem as={Link}>About</MenuItem>
-                </StyledLink>
-                <StyledLink href="/Projects" passHref>
-                  <MenuItem as={Link}>Projects</MenuItem>
-                </StyledLink>
-                <StyledLink href="/Algorithm" passHref>
-                  <MenuItem as={Link}>Algorithm</MenuItem>
-                </StyledLink>
-              </MenuList>
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  icon={<HamburgerIcon />}
+                  variant="outline"
+                />
+                <MenuList>
+                  <NextLink href="/" passHref>
+                    <MenuItem as={Link}>About</MenuItem>
+                  </NextLink>
+                  <StyledLink href="/projects" passHref>
+                    <MenuItem as={Link}>Projects</MenuItem>
+                  </StyledLink>
+                  <StyledLink href="/algorithm" passHref>
+                    <MenuItem as={Link}>Algorithm</MenuItem>
+                  </StyledLink>
+                </MenuList>
+              </Menu>
             </Box>
           </Box>
         </Menu>

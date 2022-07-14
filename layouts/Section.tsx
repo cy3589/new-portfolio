@@ -6,20 +6,26 @@ interface Section {
   delay?: number;
   duration?: number;
 }
-const StyledDiv = chakra(motion.div, {
+const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) => shouldForwardProp(prop) || prop === 'transition',
 });
 
 const Section: FC<Section> = ({ children, duration = 0.8, delay = 0 }) => (
-  <StyledDiv
+  <ChakraBox
+    // @ts-ignore no problem in operation, although type error appears.
+    transition={{
+      duration,
+      repeat: Infinity,
+      repeatType: 'loop',
+      delay,
+    }}
     initial={{ y: 10, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
-    transitionDuration={`${duration}s`}
-    transitionDelay={`${delay}s`}
+    exit={{ y: 10, opacity: 0 }}
     mb={6}
   >
     {children}
-  </StyledDiv>
+  </ChakraBox>
 );
 
 export default Section;

@@ -27,7 +27,7 @@ const components = {
 };
 
 const fonts = { heading: "'M PLUS Rounded 1c'" };
-const colors = { glassTeal: '#88ccca' };
+const colors = { grassTeal: '#88ccca' };
 const config: { initialColorMode: 'dark'; useSystemColorMode: boolean } = {
   initialColorMode: 'dark',
   useSystemColorMode: true,
