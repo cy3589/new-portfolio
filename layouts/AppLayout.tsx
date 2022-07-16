@@ -19,7 +19,7 @@ interface ChildrenFC {
 const AppLayout: FC<ChildrenFC> = ({ children, router }) => (
   <Box as="main">
     <Head>
-      <meta name="viewport" content="width=divice-width, initial-scale=1" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>Chad Portfolio</title>
     </Head>
     <Navbar path={router.asPath} />

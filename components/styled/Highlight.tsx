@@ -1,5 +1,5 @@
 import { CSSObject, Highlight as ChakraHighlight } from '@chakra-ui/react';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 
 interface HighlightProps {
   value: string;
@@ -12,4 +12,4 @@ const Highlight: FC<HighlightProps> = ({ value, styles = {} }) => (
   </ChakraHighlight>
 );
 
-export default Highlight;
+export default memo(Highlight);
