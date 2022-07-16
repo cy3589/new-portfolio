@@ -58,7 +58,7 @@ const Skill: FC<SkillProps> = ({ skill }) => {
       <Box>
         <SimpleGrid columns={[3, 3, 4]} gap={6}>
           {skill.mainSkillImages?.map(({ src, alt, title }) => (
-            <GridItem
+            <GridSkillImageItem
               key={title ?? alt ?? src.toString()}
               src={src}
               alt={alt ?? title ?? src.toString()}
@@ -71,7 +71,7 @@ const Skill: FC<SkillProps> = ({ skill }) => {
   );
 };
 
-const GridItem = ({ src, title }: MainSkillImage) => (
+const GridSkillImageItem = ({ src, title }: MainSkillImage) => (
   <Box w="100%" textAlign="center">
     <LinkBox _hover={{ transform: 'scale(1.1)' }} transition="0.3s ease">
       <SkillImageWrapper>

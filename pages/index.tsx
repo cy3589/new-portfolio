@@ -40,6 +40,7 @@ interface BasicIntroData {
     skills: Skills[][];
     mainSkillImages?: MainSkillImage[];
   };
+  projects?: any[];
 }
 const myIntroData: BasicIntroData = {
   mainSimpleInfo: "Hi, I'm Junior FrontEnd Developer",
