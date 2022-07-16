@@ -2,7 +2,7 @@ import { Text, useColorModeValue } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import ProfileImage from '@public/profile-image.jpg';
 import Image from 'next/image';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { FC } from 'react';
 
 const LogoBox = styled.span`
@@ -10,9 +10,8 @@ const LogoBox = styled.span`
   font-size: 18px;
   display: inline-flex;
   align-items: center;
-  height: 30px;
   line-height: 20px;
-  padding: 10px;
+  padding: 8px;
   cursor: pointer;
   & img {
     transition: 0.3s;
@@ -25,9 +24,9 @@ const LogoBox = styled.span`
 `;
 
 const Logo: FC = () => (
-  <Link href="/" scroll={false}>
+  <NextLink href="/" scroll={false}>
     <LogoBox>
-      <Image src={ProfileImage} width={36} height={36} alt="logo" />
+      <Image src={ProfileImage} width={24} height={24} alt="logo" />
       <Text
         color={useColorModeValue('gray.800', 'whiteAlpha.900')}
         fontFamily='M PLUS Rounded 1c", sans-serif'
@@ -37,6 +36,6 @@ const Logo: FC = () => (
         Chanyeong Jung
       </Text>
     </LogoBox>
-  </Link>
+  </NextLink>
 );
 export default Logo;

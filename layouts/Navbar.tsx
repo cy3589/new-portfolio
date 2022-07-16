@@ -77,7 +77,7 @@ const Navbar = (props: any) => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Flex align="center" mr={5}>
+        <Flex mr={5} alignItems="center">
           <Heading as="h1" size="lg" letterSpacing="tighter">
             <Logo />
           </Heading>
@@ -99,7 +99,7 @@ const Navbar = (props: any) => {
             Algorithm
           </LinkItem>
           <LinkItem
-            href="https://github.com/cy3589/new-port-folio"
+            href="https://github.com/cy3589"
             target="_blank"
             path={path}
             display="inline-flex"
