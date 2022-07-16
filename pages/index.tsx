@@ -1,10 +1,7 @@
 import type { NextPage } from 'next';
-import NextLink from 'next/link';
-import { Container, Box, Heading, Button, Text } from '@chakra-ui/react';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import { Container } from '@chakra-ui/react';
 
 import Layout from '@layouts/Layout';
-import Paragraph from '@components/styled/P';
 import { StaticImageData } from 'next/image';
 import { useMemo } from 'react';
 import MainSimpleInfo from '@components/Main/MainSimpleInfo';
@@ -19,6 +16,7 @@ import REACT_QUERY_LOGO from '@public/react-query-logo.svg';
 import JAVASCRIPT_LOGO from '@public/javascript-logo.svg';
 import TYPESCRIPT_LOGO from '@public/typescript-logo.svg';
 import EMOTION_LOGO from '@public/emotion-logo.png';
+import GIT_LOGO from '@public/git-logo.svg';
 
 export interface Skills {
   isHighlight: boolean;
@@ -86,7 +84,7 @@ const myIntroData: BasicIntroData = {
         { isHighlight: true, data: 'React-Query' },
         {
           isHighlight: false,
-          data: '를 이용하여 서버와의 연결상태를 관리하고 상태에 렌더를 구현할 수 있습니다.',
+          data: '를 이용하여 서버와의 연결상태를 관리하고 상태에 따라 다른 화면을 보여줄 수 있습니다.',
         },
       ],
       [
@@ -122,10 +120,17 @@ const myIntroData: BasicIntroData = {
           data: '를 이용하여 간단한 백엔드 서버를 구축할 수 있습니다.',
         },
       ],
+      [
+        { isHighlight: true, data: 'Git' },
+        {
+          isHighlight: false,
+          data: '을 이용하여 버전관리, 협업이 가능합니다.',
+        },
+      ],
     ],
     mainSkillImages: [
-      { src: REACT_LOGO, alt: 'reactjs-logo.png', title: 'reactjs' },
-      { src: NEXT_LOGO, alt: 'nextjs-logo.png', title: 'nextjs' },
+      { src: REACT_LOGO, alt: 'reactjs-logo.png', title: 'react' },
+      { src: NEXT_LOGO, alt: 'nextjs-logo.png', title: 'next' },
       { src: REDUX_LOGO, alt: 'redux-logo.jpg', title: 'redux' },
       {
         src: REACT_QUERY_LOGO,
@@ -135,6 +140,7 @@ const myIntroData: BasicIntroData = {
       { src: JAVASCRIPT_LOGO, alt: 'javascript-logo.svg', title: 'javascript' },
       { src: TYPESCRIPT_LOGO, alt: 'typescript-logo.svg', title: 'typescript' },
       { src: EMOTION_LOGO, alt: 'emotion-logo.png', title: 'emotion' },
+      { src: GIT_LOGO, alt: 'git-logo.svg', title: 'git' },
     ],
   },
 };

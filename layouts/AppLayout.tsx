@@ -24,7 +24,7 @@ const AppLayout: FC<ChildrenFC> = ({ children, router }) => (
       <title>Chad Portfolio</title>
     </Head>
     <Navbar path={router.asPath} />
-    <Container maxW="container.md" pt={14}>
+    <Container maxW="container.md" pt={14} minH="container.md">
       <Box>
         <LazyVoxelDog />
       </Box>

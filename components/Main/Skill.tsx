@@ -56,7 +56,7 @@ const Skill: FC<SkillProps> = ({ skill }) => {
         <Text>Main Skills</Text>
       </Heading>
       <Box>
-        <SimpleGrid columns={[3, 3, 3]} gap={6}>
+        <SimpleGrid columns={[3, 3, 4]} gap={6}>
           {skill.mainSkillImages?.map(({ src, alt, title }) => (
             <GridItem
               key={title ?? alt ?? src.toString()}
