@@ -16,6 +16,15 @@ const components = {
         marginTop: 3,
         marginBottom: 4,
       },
+      'secondary-title': {
+        textDecoration: 'underline',
+        fontSize: 20,
+        textUnderlineOffset: 6,
+        textDecorationColor: '#525252',
+        textAlign: 'center',
+        marginTop: 3,
+        marginBottom: 4,
+      },
     },
   },
   Link: {

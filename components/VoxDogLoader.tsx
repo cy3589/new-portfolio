@@ -5,7 +5,7 @@ interface DogContainerProps {
   children?: ReactNode | ReactNode[];
 }
 
-export const DogSpinner = () => (
+const DogSpinner = () => (
   <Spinner
     size="xl"
     position="absolute"
@@ -16,28 +16,27 @@ export const DogSpinner = () => (
   />
 );
 
-export const DogContainer = forwardRef<
-  null | HTMLDivElement,
-  DogContainerProps
->(({ children }, ref) => (
-  <Box
-    ref={ref}
-    className="voxel-dog"
-    m="auto"
-    mt={['-20px', '-60px', '-120px']}
-    mb={['-40px', '-140px', '-200px']}
-    w={[280, 480, 640]}
-    h={[280, 480, 640]}
-    position="relative"
-  >
-    {children}
-  </Box>
-));
+const DogContainer = forwardRef<null | HTMLDivElement, DogContainerProps>(
+  ({ children }, ref) => (
+    <Box
+      ref={ref}
+      className="voxel-dog"
+      m="auto"
+      mt={['-20px', '-60px', '-120px']}
+      mb={['-40px', '-140px', '-64px']}
+      w={[280, 480, 640]}
+      h={[280, 480, 640]}
+      position="relative"
+    >
+      {children}
+    </Box>
+  ),
+);
 
 const Loader = () => (
   <DogContainer>
     <DogSpinner />
   </DogContainer>
 );
-
+export { DogSpinner, DogContainer };
 export default Loader;

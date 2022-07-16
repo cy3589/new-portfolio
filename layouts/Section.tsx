@@ -15,7 +15,7 @@ const Section: FC<Section> = ({ children, duration = 0.8, delay = 0 }) => (
     // @ts-ignore no problem in operation, although type error appears.
     transition={{
       duration,
-      repeat: Infinity,
+      // repeat: Infinity,
       repeatType: 'loop',
       delay,
     }}
