@@ -1,7 +1,18 @@
-import { UnorderedList, ListItem, Heading, Text, Box } from '@chakra-ui/react';
+import {
+  UnorderedList,
+  ListItem,
+  Heading,
+  Text,
+  Box,
+  LinkBox,
+  LinkOverlay,
+  SimpleGrid,
+  Badge,
+} from '@chakra-ui/react';
 import { Skills } from '@pages/index';
 import { FC, Fragment } from 'react';
 import styled from '@emotion/styled';
+import Image, { StaticImageData } from 'next/image';
 
 const Code = styled.code`
   border-radius: 10px;
@@ -12,11 +23,15 @@ const Code = styled.code`
   font-weight: 600;
   font-family: 'M PLUS Rounded 1c';
 `;
-
+interface MainSkillImage {
+  src: string | StaticImageData;
+  alt?: string;
+  title?: string;
+}
 interface SkillProps {
   skill?: {
     skills: Skills[][];
-    mainSkillImages?: string[];
+    mainSkillImages?: MainSkillImage[];
   };
 }
 const Skill: FC<SkillProps> = ({ skill }) => {
@@ -40,8 +55,48 @@ const Skill: FC<SkillProps> = ({ skill }) => {
       <Heading as="h3" variant="secondary-title" boxShadow="2xl">
         <Text>Main Skills</Text>
       </Heading>
-      <Box>스킬 사진 나열~~</Box>
+      <Box>
+        <SimpleGrid columns={[3, 3, 3]} gap={6}>
+          {skill.mainSkillImages?.map(({ src, alt, title }) => (
+            <GridItem
+              key={title ?? alt ?? src.toString()}
+              src={src}
+              alt={alt ?? title ?? src.toString()}
+              title={title}
+            />
+          ))}
+        </SimpleGrid>
+      </Box>
     </Box>
   );
 };
+
+function GridItem({ src, title }: MainSkillImage) {
+  return (
+    <Box w="100%" textAlign="center">
+      <LinkBox cursor="pointer">
+        <SkillImageWrapper>
+          <Image
+            src={src}
+            alt={title ?? 'skill-image'}
+            style={{ borderRadius: '12px' }}
+            loading="lazy"
+            objectFit="cover"
+            layout="fill"
+            unoptimized
+          />
+        </SkillImageWrapper>
+        <Badge fontSize={14} mt={4}>
+          {title}
+        </Badge>
+      </LinkBox>
+    </Box>
+  );
+}
+const SkillImageWrapper = styled.div`
+  width: 100%;
+  padding-bottom: 100%;
+  height: 100%;
+  position: relative;
+`;
 export default Skill;

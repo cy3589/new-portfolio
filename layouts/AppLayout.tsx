@@ -3,7 +3,8 @@ import { Box, Container, Stack } from '@chakra-ui/react';
 import Head from 'next/head';
 import { Router } from 'next/router';
 import dynamic from 'next/dynamic';
-import Navbar from '@components/Navbar';
+import Navbar from '@layouts/Navbar';
+import Footer from '@layouts/Footer';
 import VoxelDogLoader from '@components/VoxDogLoader';
 
 const LazyVoxelDog = dynamic(() => import('@components/VoxDog'), {
@@ -29,6 +30,7 @@ const AppLayout: FC<ChildrenFC> = ({ children, router }) => (
       </Box>
       {children}
     </Container>
+    <Footer />
   </Box>
 );
 

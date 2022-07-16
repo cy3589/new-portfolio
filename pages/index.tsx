@@ -1,30 +1,36 @@
 import type { NextPage } from 'next';
 import NextLink from 'next/link';
-import {
-  Container,
-  Box,
-  Heading,
-  Button,
-  Text,
-  ListItem,
-  UnorderedList,
-} from '@chakra-ui/react';
+import { Container, Box, Heading, Button, Text } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 
 import Layout from '@layouts/Layout';
 import Paragraph from '@components/styled/P';
-import Highlight from '@components/styled/Highlight';
-import Image from 'next/image';
+import { StaticImageData } from 'next/image';
 import { useMemo } from 'react';
 import MainSimpleInfo from '@components/Main/MainSimpleInfo';
 import PersonalInfo from '@components/Main/PersonalInfo';
 import Introduce from '@components/Main/Introduce';
 import Skill from '@components/Main/Skill';
 
+import REACT_LOGO from '@public/reactjs-logo.png';
+import NEXT_LOGO from '@public/nextjs-logo.png';
+import REDUX_LOGO from '@public/redux-logo.jpg';
+import REACT_QUERY_LOGO from '@public/react-query-logo.svg';
+import JAVASCRIPT_LOGO from '@public/javascript-logo.svg';
+import TYPESCRIPT_LOGO from '@public/typescript-logo.svg';
+import EMOTION_LOGO from '@public/emotion-logo.png';
+
 export interface Skills {
   isHighlight: boolean;
   data: string;
 }
+
+interface MainSkillImage {
+  src: string | StaticImageData;
+  alt?: string;
+  title?: string;
+}
+
 interface BasicIntroData {
   mainSimpleInfo: string;
   name: string;
@@ -34,7 +40,7 @@ interface BasicIntroData {
   introduces?: string[];
   skill?: {
     skills: Skills[][];
-    mainSkillImages?: string[];
+    mainSkillImages?: MainSkillImage[];
   };
 }
 const myIntroData: BasicIntroData = {
@@ -117,6 +123,19 @@ const myIntroData: BasicIntroData = {
         },
       ],
     ],
+    mainSkillImages: [
+      { src: REACT_LOGO, alt: 'reactjs-logo.png', title: 'reactjs' },
+      { src: NEXT_LOGO, alt: 'nextjs-logo.png', title: 'nextjs' },
+      { src: REDUX_LOGO, alt: 'redux-logo.jpg', title: 'redux' },
+      {
+        src: REACT_QUERY_LOGO,
+        alt: 'react-query-logo.svg',
+        title: 'react-query',
+      },
+      { src: JAVASCRIPT_LOGO, alt: 'javascript-logo.svg', title: 'javascript' },
+      { src: TYPESCRIPT_LOGO, alt: 'typescript-logo.svg', title: 'typescript' },
+      { src: EMOTION_LOGO, alt: 'emotion-logo.png', title: 'emotion' },
+    ],
   },
 };
 
@@ -127,65 +146,9 @@ const Home: NextPage = () => {
     <Layout>
       <Container>
         <MainSimpleInfo mainSimpleInfo={mainSimpleInfo} />
-        <Layout>
-          <PersonalInfo name={name} phone={phone} email={email} />
-          <Introduce simpleInfo={simpleInfo} introduces={introduces} />
-          <Skill skill={skill} />
-          <Box>
-            <Heading as="h3" variant="section-title">
-              Work
-            </Heading>
-            <Box alignItems="center" my={4}>
-              <Text>Hello World</Text>
-            </Box>
-            <Paragraph>
-              Takuya is a freelance and a full-stack developer based in Osaka
-              with a passion for building digital services/stuff he wants.
-              Takuya is a freelance and a full-stack developer based in Osaka
-              with a passion for building digital services/stuff he wants.
-              Takuya is a freelance and a full-stack developer based in Osaka
-              with a passion for building digital services/stuff he wants.
-              Takuya is a freelance and a full-stack developer based in Osaka
-              with a passion for building digital services/stuff he wants.
-              Takuya is a freelance and a full-stack developer based in Osaka
-              with a passion for building digital services/stuff he wants.
-            </Paragraph>
-            <Box textAlign="center" justifyContent="center" my={4}>
-              <NextLink href="/projects" passHref scroll={false}>
-                <Button rightIcon={<ChevronRightIcon />} colorScheme="teal">
-                  PortFolio
-                </Button>
-              </NextLink>
-            </Box>
-          </Box>
-          <Box>
-            <Heading as="h3" variant="section-title">
-              Work
-            </Heading>
-            <Box alignItems="center" my={4}>
-              <Text>Hello World</Text>
-            </Box>
-            <Paragraph>
-              Takuya is a freelance and a full-stack developer based in Osaka
-              with a passion for building digital services/stuff he wants.
-              Takuya is a freelance and a full-stack developer based in Osaka
-              with a passion for building digital services/stuff he wants.
-              Takuya is a freelance and a full-stack developer based in Osaka
-              with a passion for building digital services/stuff he wants.
-              Takuya is a freelance and a full-stack developer based in Osaka
-              with a passion for building digital services/stuff he wants.
-              Takuya is a freelance and a full-stack developer based in Osaka
-              with a passion for building digital services/stuff he wants.
-            </Paragraph>
-            <Box textAlign="center" justifyContent="center" my={4}>
-              <NextLink href="/projects" passHref scroll={false}>
-                <Button rightIcon={<ChevronRightIcon />} colorScheme="teal">
-                  My PortFolio
-                </Button>
-              </NextLink>
-            </Box>
-          </Box>
-        </Layout>
+        <PersonalInfo name={name} phone={phone} email={email} />
+        <Introduce simpleInfo={simpleInfo} introduces={introduces} />
+        <Skill skill={skill} />
       </Container>
     </Layout>
   );
