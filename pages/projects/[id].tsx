@@ -1,6 +1,7 @@
 import { Box, Container, Text } from '@chakra-ui/react';
-import Layout from '@layouts/Layout';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import axios from 'axios';
+import Layout from '@layouts/Layout';
 
 const delay = (ms = 1000) =>
   new Promise((r) => {
@@ -39,6 +40,7 @@ export const getServerSideProps: GetServerSideProps = async (
    * return { notFound: true };
    * */
   console.log({ id });
+  // console.log(await axios.get('/getProject')); // 현재 에러남
   return { props: { id } };
 };
 

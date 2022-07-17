@@ -28,27 +28,27 @@ const MyProjectsData: ProjectsPre[] = [
   {
     thumbNailSrc: NODEBIRD_THUMBNAIL,
     title: 'NodeBird',
-    id: Date.now().toString() + 0,
+    id: '16580510039130',
   },
   {
     thumbNailSrc: SLEACT_THUMBNAIL,
     title: 'Sleact',
-    id: Date.now().toString() + 1,
+    id: '16580510039131',
   },
   {
     thumbNailSrc: O_HOUSE_THUMBNAIL,
     title: 'O-House-Clone',
-    id: Date.now().toString() + 2,
+    id: '16580510039132',
   },
   {
     thumbNailSrc: DOKTEUK_THUMBNAIL,
     title: 'Dokteuk',
-    id: Date.now().toString() + 3,
+    id: '16580510039133',
   },
   {
     thumbNailSrc: SHOW_ME_THE_FEEDBACK_THUMBNAIL,
     title: 'ShowMeTheFeedback',
-    id: Date.now().toString() + 4,
+    id: '16580510039134',
   },
 ];
 const Projects: FC = () => {
