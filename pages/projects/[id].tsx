@@ -1,47 +1,119 @@
-import { Box, Container, Text } from '@chakra-ui/react';
+import { FC, useMemo } from 'react';
+import {
+  Box,
+  Container,
+  Spinner,
+  Text,
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+} from '@chakra-ui/react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { QueryClient, useQuery, useQueryClient, dehydrate } from 'react-query';
 import Layout from '@layouts/Layout';
+import { useRouter } from 'next/router';
 
-const delay = (ms = 1000) =>
-  new Promise((r) => {
-    setTimeout(r, ms);
-  });
+const GetProjectFetcher = (id: string) => async () => {
+  const url =
+    typeof window === 'undefined'
+      ? 'http://127.0.0.1:3000'
+      : 'http://124.50.73.52:3000';
 
-interface Project {
+  const { data } = await axios.get<GetProjectAxiosResult>(
+    `${url}/api/project/${id}`,
+  );
+  return data;
+};
+
+export interface Project {
   title: string;
   isTeam: boolean;
-  useSkills?: { front?: string[]; back?: string[] };
-  isDeploy: boolean;
+  useSkills?: { front: string[]; back?: string[] };
+  deploy?: { link: string };
   gitLink?: string;
   summary: string;
   whatILean: string[];
+  description?: string;
 }
-const Project = (props: any) => {
-  console.log({ props });
+const Project: FC = () => {
+  const router = useRouter();
+  const id = (router.query as { id: string }).id;
+  const { data, isError, isLoading } = useQuery<
+    GetProjectAxiosResult,
+    AxiosError,
+    GetProjectAxiosResult,
+    string[]
+  >(['project', id], GetProjectFetcher(id), { retry: 2 });
+
+  const renderData = useMemo(() => {
+    if (isLoading || isError || !data) {
+      if (isLoading)
+        return (
+          <Spinner
+            size="xl"
+            position="absolute"
+            left="50%"
+            top="50%"
+            ml="calc(0px - var(--spinner-size) / 2)"
+            mt="calc(0px - var(--spinner-size))"
+          />
+        );
+      if (isError || !data)
+        return (
+          <Alert status="error" display="flex" flexDirection="column">
+            <AlertIcon boxSize={10} />
+            <AlertTitle>잘못된 요청입니다</AlertTitle>
+            <AlertDescription>
+              페이지의 주소가 잘못 입력되었거나,
+            </AlertDescription>
+            <AlertDescription>
+              변경 혹은 삭제되어 요청하신 페이지를 찾을 수 없습니다.
+            </AlertDescription>
+            <AlertDescription>
+              입력하신 페이지 주소를 다시 한번 확인해 주세요.
+            </AlertDescription>
+          </Alert>
+        );
+    }
+    return (
+      <Box>
+        <Text>{JSON.stringify(data?.project)}</Text>
+      </Box>
+    );
+  }, [data, isError, isLoading]);
   return (
     <Layout>
-      <Container>
-        <Box>
-          <Text>Hello World</Text>
-        </Box>
-      </Container>
+      <Container>{renderData}</Container>
     </Layout>
   );
 };
+
+interface GetProjectAxiosResult {
+  result: 'success' | 'fail';
+  message: '잘못된 접근' | '데이터가 없습니다' | '성공';
+  project: Project;
+}
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext,
 ) => {
-  const id = ctx.params?.id;
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { refetchOnWindowFocus: false } },
+  });
+  const id = (ctx.params as { id: string }).id;
   if (!id) return { notFound: true };
-  await delay(1000); // serverSideDataFetch
-  /**
-   * 데이터가 없다면
-   * return { notFound: true };
-   * */
-  console.log({ id });
-  // console.log(await axios.get('/getProject')); // 현재 에러남
-  return { props: { id } };
+  try {
+    await queryClient.prefetchQuery(['project', id], GetProjectFetcher(id));
+    return {
+      props: {
+        dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return { notFound: true };
+  }
 };
 
 export default Project;

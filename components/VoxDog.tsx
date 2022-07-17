@@ -113,6 +113,7 @@ const VoxelDog = () => {
     };
   }, [renderer, handleWindowResize]);
 
+  // <DogContainer ref={refContainer}>{loading && <DogSpinner />}</DogContainer>
   return (
     <DogContainer ref={refContainer}>{loading && <DogSpinner />}</DogContainer>
   );
