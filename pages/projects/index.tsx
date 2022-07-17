@@ -14,6 +14,10 @@ import NextLink from 'next/link';
 import { FC } from 'react';
 
 import NODEBIRD_THUMBNAIL from '@public/nodebird/nodebird-thumbnail.png';
+import SLEACT_THUMBNAIL from '@public/sleact/sleact-thumbnail.png';
+import O_HOUSE_THUMBNAIL from '@public/o-house/o-house-thumbnail__.jpg';
+import DOKTEUK_THUMBNAIL from '@public/dokteuk/dokteuk-thumbnail.png';
+import SHOW_ME_THE_FEEDBACK_THUMBNAIL from '@public/show-me-the-feedback/show-me-the-feedback-thumbnail.png';
 
 interface ProjectsPre {
   thumbNailSrc: string | StaticImageData;
@@ -27,29 +31,24 @@ const MyProjectsData: ProjectsPre[] = [
     id: Date.now().toString() + 0,
   },
   {
-    thumbNailSrc: NODEBIRD_THUMBNAIL,
-    title: 'NodeBird0',
+    thumbNailSrc: SLEACT_THUMBNAIL,
+    title: 'Sleact',
     id: Date.now().toString() + 1,
   },
   {
-    thumbNailSrc: NODEBIRD_THUMBNAIL,
-    title: 'NodeBird1',
+    thumbNailSrc: O_HOUSE_THUMBNAIL,
+    title: 'O-House-Clone',
     id: Date.now().toString() + 2,
   },
   {
-    thumbNailSrc: NODEBIRD_THUMBNAIL,
-    title: 'NodeBird2',
+    thumbNailSrc: DOKTEUK_THUMBNAIL,
+    title: 'Dokteuk',
     id: Date.now().toString() + 3,
   },
   {
-    thumbNailSrc: NODEBIRD_THUMBNAIL,
-    title: 'NodeBird3',
+    thumbNailSrc: SHOW_ME_THE_FEEDBACK_THUMBNAIL,
+    title: 'ShowMeTheFeedback',
     id: Date.now().toString() + 4,
-  },
-  {
-    thumbNailSrc: NODEBIRD_THUMBNAIL,
-    title: 'NodeBird4',
-    id: Date.now().toString() + 5,
   },
 ];
 const Projects: FC = () => {
