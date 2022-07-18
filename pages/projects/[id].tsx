@@ -8,6 +8,9 @@ import {
   AlertDescription,
   AlertIcon,
   AlertTitle,
+  Flex,
+  List,
+  ListItem,
 } from '@chakra-ui/react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { AxiosError } from 'axios';
@@ -57,9 +60,54 @@ const Project: FC = () => {
           </Alert>
         );
     }
+    const {
+      title,
+      isTeam,
+      useSkills,
+      deploy,
+      gitLink,
+      summary,
+      whatILean,
+      description,
+    } = data.project;
     return (
       <Box>
-        <Text>{JSON.stringify(data?.project)}</Text>
+        <Text>{title}</Text>
+        <Text>{isTeam}</Text>
+        {useSkills && (
+          <Box>
+            <Text>{useSkills.front}</Text>
+            {useSkills.back && <Text>{useSkills.back}</Text>}
+          </Box>
+        )}
+        <Flex flexDirection="column">
+          <Flex>
+            <Text>Deploy</Text>
+            <Text>{deploy ? 'O' : 'X'}</Text>
+          </Flex>
+          {deploy && (
+            <Flex>
+              <Text>link</Text>
+              <Text>{deploy.link}</Text>
+            </Flex>
+          )}
+        </Flex>
+        <Flex>
+          <Text>gitLink</Text>
+          <Text>{gitLink}</Text>
+        </Flex>
+        <Flex>
+          <Text>summary</Text>
+          <Text>{summary}</Text>
+        </Flex>
+        {description && <Text>{description}</Text>}
+        <List>
+          {whatILean.map((learn, index) => (
+            <ListItem key={index}>
+              <Text>{learn}</Text>
+            </ListItem>
+          ))}
+        </List>
       </Box>
     );
   }, [data, isError, isLoading]);
