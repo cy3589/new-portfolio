@@ -4,13 +4,13 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { loadGLTFModel } from '@utils/model';
 import { DogSpinner, DogContainer } from '@components/VoxDogLoader';
 
-const easeOutCirc = (x: number) => Math.sqrt(1 - Math.pow(x - 1, 4));
+const easeOutCirc = (x: number) => Math.sqrt(1 - (x - 1) ** 4);
 
 const VoxelDog = () => {
   const refContainer = useRef<null | HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
   const [renderer, setRenderer] = useState<THREE.WebGLRenderer>();
-  const [_camera, setCamera] = useState<THREE.OrthographicCamera>();
+  const [, setCamera] = useState<THREE.OrthographicCamera>();
   const [target] = useState(new THREE.Vector3(-0.5, 1.2, 0));
   const [initialCameraPosition] = useState(
     new THREE.Vector3(
@@ -20,7 +20,7 @@ const VoxelDog = () => {
     ),
   );
   const [scene] = useState(new THREE.Scene());
-  const [_controls, setControls] = useState<OrbitControls>();
+  const [, setControls] = useState<OrbitControls>();
 
   const handleWindowResize = useCallback(() => {
     const { current: container } = refContainer;
@@ -39,15 +39,15 @@ const VoxelDog = () => {
       const scW = container.clientWidth;
       const scH = container.clientHeight;
 
-      const renderer = new THREE.WebGLRenderer({
+      const newRenderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true,
       });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(scW, scH);
-      renderer.outputEncoding = THREE.sRGBEncoding;
-      container.appendChild(renderer.domElement);
-      setRenderer(renderer);
+      newRenderer.setPixelRatio(window.devicePixelRatio);
+      newRenderer.setSize(scW, scH);
+      newRenderer.outputEncoding = THREE.sRGBEncoding;
+      container.appendChild(newRenderer.domElement);
+      setRenderer(newRenderer);
 
       // 640 -> 240
       // 8   -> 6
@@ -67,18 +67,10 @@ const VoxelDog = () => {
       const ambientLight = new THREE.AmbientLight(0xcccccc, 1);
       scene.add(ambientLight);
 
-      const controls = new OrbitControls(camera, renderer.domElement);
+      const controls = new OrbitControls(camera, newRenderer.domElement);
       controls.autoRotate = true;
       controls.target = target;
       setControls(controls);
-
-      loadGLTFModel(scene, '/dog.glb', {
-        receiveShadow: false,
-        castShadow: false,
-      }).then(() => {
-        animate();
-        setLoading(false);
-      });
 
       let req: number = 0;
       let frame = 0;
@@ -96,14 +88,23 @@ const VoxelDog = () => {
           camera.lookAt(target);
         } else controls.update();
 
-        renderer.render(scene, camera);
+        newRenderer.render(scene, camera);
       };
+
+      loadGLTFModel(scene, '/dog.glb', {
+        receiveShadow: false,
+        castShadow: false,
+      }).then(() => {
+        animate();
+        setLoading(false);
+      });
 
       return () => {
         cancelAnimationFrame(req);
-        renderer.dispose();
+        newRenderer.dispose();
       };
     }
+    return () => {};
   }, []);
 
   useEffect(() => {

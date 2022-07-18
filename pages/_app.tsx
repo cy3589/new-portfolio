@@ -21,7 +21,7 @@ const App = ({ Component, pageProps, router }: AppProps) => {
       <AppLayout router={router}>
         <AnimatePresence
           exitBeforeEnter
-          initial={true}
+          initial
           onExitComplete={() => {
             if (typeof window !== 'undefined') window.scrollTo({ top: 0 });
           }}

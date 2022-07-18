@@ -4,15 +4,13 @@ import {
   Heading,
   Text,
   Box,
-  LinkBox,
-  LinkOverlay,
   SimpleGrid,
-  Badge,
 } from '@chakra-ui/react';
-import { Skills } from '@pages/index';
+import { Skills } from '@typings/skill';
 import { FC, Fragment } from 'react';
 import styled from '@emotion/styled';
-import Image, { StaticImageData } from 'next/image';
+import { StaticImageData } from 'next/image';
+import GridSkillImageItem from '@components/Main/GridSkillImageItem';
 
 const Code = styled.code`
   border-radius: 10px;
@@ -71,30 +69,4 @@ const Skill: FC<SkillProps> = ({ skill }) => {
   );
 };
 
-const GridSkillImageItem = ({ src, title }: MainSkillImage) => (
-  <Box w="100%" textAlign="center">
-    <LinkBox _hover={{ transform: 'scale(1.1)' }} transition="0.3s ease">
-      <SkillImageWrapper>
-        <Image
-          src={src}
-          alt={title ?? 'skill-image'}
-          style={{ borderRadius: '12px' }}
-          loading="lazy"
-          objectFit="cover"
-          layout="fill"
-          unoptimized
-        />
-      </SkillImageWrapper>
-      <Badge fontSize={14} mt={4}>
-        {title}
-      </Badge>
-    </LinkBox>
-  </Box>
-);
-const SkillImageWrapper = styled.div`
-  width: 100%;
-  padding-bottom: 100%;
-  height: 100%;
-  position: relative;
-`;
 export default Skill;

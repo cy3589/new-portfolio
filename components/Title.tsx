@@ -1,14 +1,17 @@
+import { FC, ReactNode } from 'react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, Heading, Link } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { FC, ReactNode } from 'react';
+
 interface TitleProps {
   children?: ReactNode | ReactNode[];
+  title: string;
+  url: string;
 }
-const Title: FC<TitleProps> = ({ children }) => (
+const Title: FC<TitleProps> = ({ children, title, url }) => (
   <Box>
-    <NextLink href="/projects" passHref>
-      <Link>Projects</Link>
+    <NextLink href={url} passHref>
+      <Link href={url}>{title}</Link>
     </NextLink>
     <span>
       {' '}

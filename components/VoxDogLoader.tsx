@@ -32,6 +32,7 @@ const DogContainer = forwardRef<null | HTMLDivElement, DogContainerProps>(
     </Box>
   ),
 );
+DogContainer.displayName = 'DogContainer';
 
 const Loader = () => (
   <DogContainer>

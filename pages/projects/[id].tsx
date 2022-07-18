@@ -11,9 +11,10 @@ import {
 } from '@chakra-ui/react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import axios, { AxiosError } from 'axios';
-import { QueryClient, useQuery, useQueryClient, dehydrate } from 'react-query';
+import { QueryClient, useQuery, dehydrate } from 'react-query';
 import Layout from '@layouts/Layout';
 import { useRouter } from 'next/router';
+import { GetProjectAxiosResult } from '@typings/project';
 
 const GetProjectFetcher = (id: string) => async () => {
   const url =
@@ -27,19 +28,9 @@ const GetProjectFetcher = (id: string) => async () => {
   return data;
 };
 
-export interface Project {
-  title: string;
-  isTeam: boolean;
-  useSkills?: { front: string[]; back?: string[] };
-  deploy?: { link: string };
-  gitLink?: string;
-  summary: string;
-  whatILean: string[];
-  description?: string;
-}
 const Project: FC = () => {
   const router = useRouter();
-  const id = (router.query as { id: string }).id;
+  const id = router.query?.id as string;
   const { data, isError, isLoading } = useQuery<
     GetProjectAxiosResult,
     AxiosError,
@@ -90,18 +81,13 @@ const Project: FC = () => {
   );
 };
 
-interface GetProjectAxiosResult {
-  result: 'success' | 'fail';
-  message: '잘못된 접근' | '데이터가 없습니다' | '성공';
-  project: Project;
-}
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext,
 ) => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { refetchOnWindowFocus: false } },
   });
-  const id = (ctx.params as { id: string }).id;
+  const id = ctx.params?.id as string;
   if (!id) return { notFound: true };
   try {
     await queryClient.prefetchQuery(['project', id], GetProjectFetcher(id));
@@ -111,7 +97,7 @@ export const getServerSideProps: GetServerSideProps = async (
       },
     };
   } catch (error) {
-    console.error(error);
+    if (typeof window !== 'undefined') window.console.error(error);
     return { notFound: true };
   }
 };
