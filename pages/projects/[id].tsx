@@ -10,23 +10,12 @@ import {
   AlertTitle,
 } from '@chakra-ui/react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { QueryClient, useQuery, dehydrate } from 'react-query';
 import Layout from '@layouts/Layout';
 import { useRouter } from 'next/router';
 import { GetProjectAxiosResult } from '@typings/project';
-
-const GetProjectFetcher = (id: string) => async () => {
-  const url =
-    typeof window === 'undefined'
-      ? 'http://127.0.0.1:3000'
-      : 'http://124.50.73.52:3000';
-
-  const { data } = await axios.get<GetProjectAxiosResult>(
-    `${url}/api/project/${id}`,
-  );
-  return data;
-};
+import { GetProjectFetcher } from '@fetchers/project';
 
 const Project: FC = () => {
   const router = useRouter();
