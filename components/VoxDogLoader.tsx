@@ -24,11 +24,8 @@ const DogContainer = forwardRef<null | HTMLDivElement, DogContainerProps>(
       m="auto"
       mt={['-20px', '-60px', '-120px']}
       mb={['-40px', '-140px', '-64px']}
-      // mb={['20px', '40px', '60px']}
       w={[180, 320, 480]}
       h={[180, 320, 480]}
-      // w={100}
-      // h={100}
       position="relative"
     >
       {children}

@@ -9,10 +9,22 @@ const GetProjectFetcher = (id: string) => async () => {
       : 'http://124.50.73.52:3000';
 
   const { data } = await axios.get<GetProjectAxiosResult>(
-    `${url}/api/project/${id}`,
+    `${url}/api/user/project/${id}`,
   );
   return data;
 };
 
-export { GetProjectFetcher };
+const GetProjectsFetcher = (id: string) => async () => {
+  const url =
+    typeof window === 'undefined'
+      ? 'http://127.0.0.1:3000'
+      : 'http://124.50.73.52:3000';
+
+  const { data } = await axios.get<GetProjectAxiosResult>(
+    `${url}/api/user/projects?userId=${id}`,
+  );
+  return data;
+};
+
+export { GetProjectFetcher, GetProjectsFetcher };
 export default {};

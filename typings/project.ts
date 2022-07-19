@@ -6,7 +6,7 @@ export interface GridProjectItemProps {
   title: string;
   id: string;
 }
-export interface ProjectsPre {
+export interface ProjectsPreview {
   thumbNailSrc: string | StaticImageData;
   title: string;
   id: string;

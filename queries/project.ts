@@ -7,10 +7,12 @@ import { AxiosError } from 'axios';
 
 const GetProject = (id: string) =>
   useQuery<GetProjectAxiosResult, AxiosError, GetProjectAxiosResult, string[]>(
-    ['project', id],
+    ['user', 'project', id],
     GetProjectFetcher(id),
     { retry: 2 },
   );
+const GetProjects = (userId: string) =>
+  useQuery(['user', 'projects'], GetProjectsFetcher(userId));
 
 export { GetProject };
 export default {};

@@ -9,26 +9,23 @@ import {
   AlertIcon,
   AlertTitle,
   Flex,
-  List,
   ListItem,
+  Heading,
+  Code,
+  Link,
+  UnorderedList,
 } from '@chakra-ui/react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { AxiosError } from 'axios';
-import { QueryClient, useQuery, dehydrate } from 'react-query';
+import { QueryClient, dehydrate } from 'react-query';
 import Layout from '@layouts/Layout';
 import { useRouter } from 'next/router';
-import { GetProjectAxiosResult } from '@typings/project';
 import { GetProjectFetcher } from '@fetchers/project';
+import { GetProject } from '@queries/project';
 
 const Project: FC = () => {
   const router = useRouter();
   const id = router.query?.id as string;
-  const { data, isError, isLoading } = useQuery<
-    GetProjectAxiosResult,
-    AxiosError,
-    GetProjectAxiosResult,
-    string[]
-  >(['project', id], GetProjectFetcher(id), { retry: 2 });
+  const { data, isError, isLoading } = GetProject(id);
 
   const renderData = useMemo(() => {
     if (isLoading || isError || !data) {
@@ -72,42 +69,79 @@ const Project: FC = () => {
     } = data.project;
     return (
       <Box>
-        <Text>{title}</Text>
-        <Text>{isTeam}</Text>
+        <Heading>{title}</Heading>
+        <Heading mt="2" fontSize="xl" as="p">{`${
+          isTeam ? '팀' : '개인'
+        }프로젝트`}</Heading>
         {useSkills && (
           <Box>
-            <Text>{useSkills.front}</Text>
-            {useSkills.back && <Text>{useSkills.back}</Text>}
+            <Box alignItems="center" my={4}>
+              <Text>사용 언어 및 라이브러리</Text>
+            </Box>
+            <Box>
+              <Flex flexWrap="wrap" rowGap="2">
+                <Text mr="2">Front: </Text>
+                {useSkills.front.map((frontSkill) => (
+                  <Code key={frontSkill} mr="2">
+                    {frontSkill}
+                  </Code>
+                ))}
+              </Flex>
+            </Box>
+            {useSkills.back && (
+              <Box mt="2">
+                <Flex flexWrap="wrap" rowGap="2">
+                  <Text mr="2">Back: </Text>
+                  {useSkills.back.map((backSkill) => (
+                    <Code key={backSkill} mr="2">
+                      {backSkill}
+                    </Code>
+                  ))}
+                </Flex>
+              </Box>
+            )}
           </Box>
         )}
-        <Flex flexDirection="column">
+        <Flex mt="2" flexDirection="column">
           <Flex>
-            <Text>Deploy</Text>
+            <Text mr="2">배포여부: </Text>
             <Text>{deploy ? 'O' : 'X'}</Text>
           </Flex>
           {deploy && (
-            <Flex>
-              <Text>link</Text>
-              <Text>{deploy.link}</Text>
+            <Flex mt="2">
+              <Text mr="2">배포링크:</Text>
+              <Link target="_blank" href={deploy.link}>
+                {deploy.link}
+              </Link>
             </Flex>
           )}
         </Flex>
-        <Flex>
-          <Text>gitLink</Text>
-          <Text>{gitLink}</Text>
+        <Flex mt="2">
+          <Text mr="2">Git: </Text>
+          <Link target="_blank" href={gitLink}>
+            {gitLink}
+          </Link>
         </Flex>
-        <Flex>
-          <Text>summary</Text>
-          <Text>{summary}</Text>
+        <Flex mt="4" flexDirection="column">
+          <Heading fontSize="xl">summary</Heading>
+          <Text mt="2">{summary}</Text>
         </Flex>
-        {description && <Text>{description}</Text>}
-        <List>
+        {description && (
+          <Flex mt="4" flexDirection="column">
+            <Heading fontSize="lg">description</Heading>
+            <Text mt="2">{description}</Text>
+          </Flex>
+        )}
+        <Heading mt="4" fontSize="xl">
+          Learned
+        </Heading>
+        <UnorderedList mt="2">
           {whatILean.map((learn, index) => (
-            <ListItem key={index}>
+            <ListItem mt="2" key={index}>
               <Text>{learn}</Text>
             </ListItem>
           ))}
-        </List>
+        </UnorderedList>
       </Box>
     );
   }, [data, isError, isLoading]);
@@ -121,13 +155,17 @@ const Project: FC = () => {
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext,
 ) => {
+  if (!ctx.req.headers.referer) return { props: {} };
   const queryClient = new QueryClient({
     defaultOptions: { queries: { refetchOnWindowFocus: false } },
   });
   const id = ctx.params?.id as string;
   if (!id) return { notFound: true };
   try {
-    await queryClient.prefetchQuery(['project', id], GetProjectFetcher(id));
+    await queryClient.prefetchQuery(
+      ['user', 'project', id],
+      GetProjectFetcher(id),
+    );
     return {
       props: {
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),

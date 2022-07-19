@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import type { Project } from '@pages/projects/[id]';
+import type { Project } from '@typings/project';
 
 const dummyProjects: { [id: string]: Project } = {
   '16580510039130': {
