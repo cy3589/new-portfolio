@@ -31,8 +31,14 @@ const Footer = () => (
       href="https://github.com/cy3589/new-port-folio"
       passHref
       scroll={false}
+      target="_blank"
     >
-      <Link justifyContent="center" target="_blank" p={1}>
+      <Link
+        href="https://github.com/cy3589/new-port-folio"
+        justifyContent="center"
+        target="_blank"
+        p={1}
+      >
         <Box position="relative">
           <IoLogoGithub
             size={48}

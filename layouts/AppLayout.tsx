@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { Box, Container, Stack } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import Head from 'next/head';
 import { Router } from 'next/router';
 import dynamic from 'next/dynamic';

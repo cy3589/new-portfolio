@@ -68,6 +68,7 @@ const VoxelDog = () => {
       scene.add(ambientLight);
 
       const controls = new OrbitControls(camera, newRenderer.domElement);
+      controls.enableZoom = false;
       controls.autoRotate = true;
       controls.target = target;
       setControls(controls);
