@@ -23,6 +23,9 @@ const Footer = () => (
         Typescript
       </Code>{' '}
       <Code pt="1" pb="0.5">
+        react-query
+      </Code>{' '}
+      <Code pt="1" pb="0.5">
         @chakra-ui
       </Code>{' '}
       로 제작되었습니다.
