@@ -4,6 +4,10 @@ import type { Project } from '@typings/project';
 const dummyProjects: { [id: string]: Project } = {
   '16580510039130': {
     title: 'NodeBird',
+    images: [
+      '/nodebird/nodebird-image0.png',
+      '/nodebird/nodebird-thumbnail.png',
+    ],
     isTeam: false,
     useSkills: {
       front: [
@@ -33,6 +37,15 @@ const dummyProjects: { [id: string]: Project } = {
 
   '16580510039131': {
     title: 'Sleact',
+    images: [
+      '/sleact/sleact-thumbnail.png',
+      '/sleact/sleact-image0.png',
+      '/sleact/sleact-image1.png',
+      '/sleact/sleact-image2.png',
+      '/sleact/sleact-image3.png',
+      '/sleact/sleact-image4.png',
+      '/sleact/sleact-image5.png',
+    ],
     isTeam: false,
     useSkills: {
       front: [
@@ -59,6 +72,13 @@ const dummyProjects: { [id: string]: Project } = {
 
   '16580510039132': {
     title: 'O-House-Clone',
+    images: [
+      '/o-house/o-house-thumbnail.jpg',
+      '/o-house/o-house-image0.png',
+      '/o-house/o-house-image1.png',
+      '/o-house/o-house-image2.jpg',
+      '/o-house/o-house-image3.jpg',
+    ],
     isTeam: false,
     deploy: { link: 'https://o-house-clone.cy3589.com/store' },
     useSkills: { front: ['NextJS'], back: ['오늘의집 API'] },
@@ -75,6 +95,7 @@ const dummyProjects: { [id: string]: Project } = {
 
   '16580510039133': {
     title: 'Dokteuk',
+    images: ['/dokteuk/dokteuk-thumbnail.png'],
     isTeam: true,
     useSkills: {
       front: [
@@ -102,6 +123,12 @@ const dummyProjects: { [id: string]: Project } = {
 
   '16580510039134': {
     title: 'ShowMeTheFeedback',
+    images: [
+      '/show-me-the-feedback/show-me-the-feedback-thumbnail.png',
+      '/show-me-the-feedback/show-me-the-feedback-image0.png',
+      '/show-me-the-feedback/show-me-the-feedback-image1.png',
+      '/show-me-the-feedback/show-me-the-feedback-image2.png',
+    ],
     isTeam: true,
     useSkills: {
       front: ['HTML', 'CSS', 'JAVASCRIPT'],
@@ -121,25 +148,23 @@ const dummyProjects: { [id: string]: Project } = {
 };
 
 const project = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === 'GET') {
-    try {
-      const projectId = (req.query as { projectId: string })?.projectId;
-      if (!projectId)
-        return res.status(401).json({ result: 'fail', message: '잘못된 접근' });
-      if (!dummyProjects[projectId])
-        return res
-          .status(401)
-          .json({ result: 'fail', message: '데이터가 없습니다' });
-      return res.status(201).json({
-        result: 'success',
-        message: '성공',
-        project: dummyProjects[projectId],
-      });
-    } catch (error) {
-      // if (axios.isAxiosError(error)) console.error(error.response?.data);
-      return res.status(500).send('에러발생');
-    }
-  } else return res.status(401).send('잘못된 접근');
+  try {
+    const projectId = (req.query as { projectId: string })?.projectId;
+    if (!projectId)
+      return res.status(401).json({ result: 'fail', message: '잘못된 접근' });
+    if (!dummyProjects[projectId])
+      return res
+        .status(401)
+        .json({ result: 'fail', message: '데이터가 없습니다' });
+    return res.status(201).json({
+      result: 'success',
+      message: '성공',
+      project: dummyProjects[projectId],
+    });
+  } catch (error) {
+    // if (axios.isAxiosError(error)) console.error(error.response?.data);
+    return res.status(500).send('에러발생');
+  }
 };
 
 export default project;

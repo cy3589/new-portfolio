@@ -16,7 +16,7 @@ import { GetUserInfo } from '@queries/info';
 import { GetUserInfoFetcher } from '@fetchers/userInfo';
 
 const Home: NextPage = () => {
-  const { data, isLoading } = GetUserInfo('1');
+  const { data, isLoading } = GetUserInfo();
   const info = useMemo(() => data?.info ?? null, [data]);
   if (isLoading)
     return (
@@ -51,24 +51,20 @@ const Home: NextPage = () => {
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext,
 ) => {
-  if (!ctx.req.headers.referer) return { props: {} };
+  if (ctx.req.headers.referer) return { props: {} }; // 첫 방문이 아니라면 prefetch 하지 않음
   const queryClient = new QueryClient({
     defaultOptions: { queries: { refetchOnWindowFocus: false } },
   });
-  const id = (ctx.params?.id ?? '1') as string;
-  if (!id) return { notFound: true };
   try {
-    await queryClient.prefetchQuery(
-      ['user', 'info', id],
-      GetUserInfoFetcher(id),
-    );
+    await queryClient.prefetchQuery(['user', 'info'], GetUserInfoFetcher);
     return {
       props: {
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
       },
     };
   } catch (error) {
-    if (typeof window !== 'undefined') window.console.error(error);
+    // eslint-disable-next-line no-console
+    console.error(error);
     return { notFound: true };
   }
 };

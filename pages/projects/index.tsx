@@ -1,16 +1,14 @@
 import { Container, Heading, SimpleGrid } from '@chakra-ui/react';
 import Layout from '@layouts/Layout';
 import { FC } from 'react';
-import NODEBIRD_THUMBNAIL from '@public/nodebird/nodebird-thumbnail.png';
-import SLEACT_THUMBNAIL from '@public/sleact/sleact-thumbnail.png';
-import O_HOUSE_THUMBNAIL from '@public/o-house/o-house-thumbnail__.jpg';
-import DOKTEUK_THUMBNAIL from '@public/dokteuk/dokteuk-thumbnail.png';
-import SHOW_ME_THE_FEEDBACK_THUMBNAIL from '@public/show-me-the-feedback/show-me-the-feedback-thumbnail.png';
-import { ProjectsPreview } from '@typings/project';
 import GridProjectItem from '@components/projects/GridProjectItem';
+import { GetProjects } from '@queries/project';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { dehydrate, QueryClient } from 'react-query';
+import { GetProjectsFetcher } from '@fetchers/project';
 
 const Projects: FC = () => {
-  const {} = GetProjects('1');
+  const { data: myProjectsData } = GetProjects();
   return (
     <Layout>
       <Container>
@@ -18,7 +16,7 @@ const Projects: FC = () => {
           Projects
         </Heading>
         <SimpleGrid columns={[1, 2, 2]} gap={6}>
-          {MyProjectsData.map(({ thumbNailSrc, title, id }) => (
+          {myProjectsData?.project.map(({ thumbNailSrc, title, id }) => (
             <GridProjectItem
               key={id}
               thumbNailSrc={thumbNailSrc}
@@ -30,6 +28,27 @@ const Projects: FC = () => {
       </Container>
     </Layout>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext,
+) => {
+  if (ctx.req.headers.referer) return { props: {} };
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { refetchOnWindowFocus: false } },
+  });
+  try {
+    await queryClient.prefetchQuery(['user', 'projects'], GetProjectsFetcher);
+    return {
+      props: {
+        dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      },
+    };
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+    return { notFound: true };
+  }
 };
 
 export default Projects;

@@ -118,9 +118,7 @@ const userInfo: { [_ in string]: UserInfo } = {
 const info = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
     try {
-      const userId = (req.query as { userId: string })?.userId;
-      if (!userId)
-        return res.status(401).json({ result: 'fail', message: '잘못된 접근' });
+      const userId = '1';
       if (!userInfo[userId])
         return res
           .status(401)

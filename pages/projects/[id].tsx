@@ -14,13 +14,24 @@ import {
   Code,
   Link,
   UnorderedList,
+  Image,
 } from '@chakra-ui/react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { QueryClient, dehydrate } from 'react-query';
-import Layout from '@layouts/Layout';
 import { useRouter } from 'next/router';
+import { EffectCards } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import Layout from '@layouts/Layout';
 import { GetProjectFetcher } from '@fetchers/project';
 import { GetProject } from '@queries/project';
+
+// import 'swiper/swiper.min.css';
+// eslint-disable-next-line import/no-unresolved
+import 'swiper/css';
+// import 'swiper/modules/effect-cards/effect-cards.min.css';
+// eslint-disable-next-line import/no-unresolved
+import 'swiper/css/effect-cards';
 
 const Project: FC = () => {
   const router = useRouter();
@@ -66,6 +77,7 @@ const Project: FC = () => {
       summary,
       whatILean,
       description,
+      images,
     } = data.project;
     return (
       <Box>
@@ -142,6 +154,43 @@ const Project: FC = () => {
             </ListItem>
           ))}
         </UnorderedList>
+        {images && images.length > 0 && (
+          <Box>
+            <Heading mt="4" mb="4" fontSize="xl">
+              Images
+            </Heading>
+            <Swiper
+              modules={[EffectCards]}
+              grabCursor
+              effect="cards"
+              cardsEffect={{ slideShadows: true }}
+            >
+              {images.map((src, index) => (
+                <SwiperSlide key={index}>
+                  <Box
+                    w="100%"
+                    borderRadius="24px"
+                    textAlign="center"
+                    border="2px"
+                    pb="100%"
+                    position="relative"
+                    overflow="hidden"
+                    bg="#000"
+                  >
+                    <Image
+                      position="absolute"
+                      src={src}
+                      alt={src}
+                      w="100%"
+                      h="100%"
+                      objectFit="contain"
+                    />
+                  </Box>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Box>
+        )}
       </Box>
     );
   }, [data, isError, isLoading]);
@@ -155,7 +204,7 @@ const Project: FC = () => {
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext,
 ) => {
-  if (!ctx.req.headers.referer) return { props: {} };
+  if (ctx.req.headers.referer) return { props: {} };
   const queryClient = new QueryClient({
     defaultOptions: { queries: { refetchOnWindowFocus: false } },
   });
@@ -172,7 +221,8 @@ export const getServerSideProps: GetServerSideProps = async (
       },
     };
   } catch (error) {
-    if (typeof window !== 'undefined') window.console.error(error);
+    // eslint-disable-next-line no-console
+    console.error(error);
     return { notFound: true };
   }
 };
