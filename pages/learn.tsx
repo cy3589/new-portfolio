@@ -4,6 +4,7 @@ import {
   Flex,
   Heading,
   ListItem,
+  SimpleGrid,
   Text,
   UnorderedList,
 } from '@chakra-ui/react';
@@ -43,8 +44,8 @@ const Learn: FC = () => {
             <UnorderedList ml="8" mt="2">
               {traning.map(({ company, period }) => (
                 <ListItem key={company}>
-                  <Flex>
-                    <Text mr="1">{company}</Text>
+                  <Flex flexWrap="wrap">
+                    <Text mr="1.5">{company}</Text>
                     <Text>{`(${period})`}</Text>
                   </Flex>
                 </ListItem>
@@ -58,9 +59,8 @@ const Learn: FC = () => {
             <UnorderedList ml="8" mt="2">
               {education.map(({ university, major, period }) => (
                 <ListItem key={university}>
-                  <Flex>
-                    <Text mr="2">{university}</Text>
-                    <Text mr="2">/</Text>
+                  <Flex flexWrap="wrap">
+                    <Text mr="1.5">{university}</Text>
                     <Text mr="1">{major}</Text>
                     <Text>{`(${period})`}</Text>
                   </Flex>
