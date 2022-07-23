@@ -16,7 +16,7 @@ const Projects: FC = () => {
           Projects
         </Heading>
         <SimpleGrid columns={[1, 2, 2]} gap={6}>
-          {myProjectsData?.project.map(({ thumbNailSrc, title, id }) => (
+          {myProjectsData?.projects.map(({ thumbNailSrc, title, id }) => (
             <GridProjectItem
               key={id}
               thumbNailSrc={thumbNailSrc}

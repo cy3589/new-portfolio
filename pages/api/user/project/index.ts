@@ -29,12 +29,12 @@ const UserProjects: ProjectsPreview[] = [
   },
 ];
 
-const project = async (req: NextApiRequest, res: NextApiResponse) => {
+const projects = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     return res.status(201).json({
       result: 'success',
       message: '성공',
-      project: UserProjects,
+      projects: UserProjects,
     });
   } catch (error) {
     // if (axios.isAxiosError(error)) console.error(error.response?.data);
@@ -42,4 +42,4 @@ const project = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default project;
+export default projects;

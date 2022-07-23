@@ -7,23 +7,23 @@ import {
   Text,
   UnorderedList,
 } from '@chakra-ui/react';
-import Layout from '@layouts/Layout';
 import { FC, useMemo } from 'react';
 
-const data = {
-  learn: {
-    traning: [{ company: '엘리스 코딩 부트캠프', period: '2021.10 ~ 2022.02' }],
-    education: [
-      {
-        university: '단국대학교',
-        major: '전자전기공학부 학사',
-        period: '2016.03 ~ 2020.02',
-      },
-    ],
-  },
-};
+import Layout from '@layouts/Layout';
+import { GetLean } from '@queries/learn';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { dehydrate, QueryClient } from 'react-query';
+import { GetLearnFetcher } from '@fetchers/learn';
+
 const Learn: FC = () => {
-  const { traning, education } = useMemo(() => data?.learn, [data]);
+  const { data } = GetLean();
+  const { traning, education } = useMemo(() => {
+    const nullish = { traning: null, education: null };
+    if (!data) return nullish;
+    if (!data.learn) return nullish;
+    if (!data.learn.education && !data.learn.traning) return nullish;
+    return data.learn;
+  }, [data]);
   if (!data || (!traning && !education))
     return (
       <Layout>
@@ -73,4 +73,26 @@ const Learn: FC = () => {
     </Layout>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext,
+) => {
+  if (ctx.req.headers.referer) return { props: {} }; // 첫 방문이 아니라면 prefetch 하지 않음
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { refetchOnWindowFocus: false } },
+  });
+  try {
+    await queryClient.prefetchQuery(['user', 'learn'], GetLearnFetcher);
+    return {
+      props: {
+        dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      },
+    };
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+    return { notFound: true };
+  }
+};
+
 export default Learn;

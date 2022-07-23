@@ -1,7 +1,7 @@
 import { UserInfo } from '@typings/info';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const userInfo: { [_ in string]: UserInfo } = {
+const info: { [_ in string]: UserInfo } = {
   '1': {
     mainSimpleInfo: "Hi, I'm Junior FrontEnd Developer",
     name: 'Chad',
@@ -115,24 +115,22 @@ const userInfo: { [_ in string]: UserInfo } = {
   },
 };
 
-const info = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === 'GET') {
-    try {
-      const userId = '1';
-      if (!userInfo[userId])
-        return res
-          .status(401)
-          .json({ result: 'fail', message: '데이터가 없습니다' });
-      return res.status(201).json({
-        result: 'success',
-        message: '성공',
-        info: userInfo[userId],
-      });
-    } catch (error) {
-      // if (axios.isAxiosError(error)) console.error(error.response?.data);
-      return res.status(500).send('에러발생');
-    }
-  } else return res.status(401).send('잘못된 접근');
+const infoHandler = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const userId = '1';
+    if (!info[userId])
+      return res
+        .status(401)
+        .json({ result: 'fail', message: '데이터가 없습니다' });
+    return res.status(201).json({
+      result: 'success',
+      message: '성공',
+      info: info[userId],
+    });
+  } catch (error) {
+    // if (axios.isAxiosError(error)) console.error(error.response?.data);
+    return res.status(500).send('에러발생');
+  }
 };
 
-export default info;
+export default infoHandler;

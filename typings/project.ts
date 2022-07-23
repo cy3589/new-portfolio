@@ -31,5 +31,5 @@ export interface GetProjectAxiosResult {
 export interface GetProjectsAxiosResult {
   result: 'success' | 'fail';
   message: '잘못된 접근' | '데이터가 없습니다' | '성공';
-  project: GridProjectItemProps[];
+  projects: GridProjectItemProps[];
 }
