@@ -7,7 +7,6 @@ export default class Document extends NextDocument {
     return (
       <Html>
         <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="description" content="Chad's portfolio" />
           <meta name="author" content="Chad" />
           <link rel="apple-touch-icon" href="apple-touch-icon.png" />
