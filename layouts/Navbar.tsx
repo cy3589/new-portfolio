@@ -124,6 +124,7 @@ const Navbar = (props: any) => {
                   as={IconButton}
                   icon={<HamburgerIcon />}
                   variant="outline"
+                  aria-label="Nav menu button"
                 />
                 <MenuList>
                   <NextLink href="/" passHref>

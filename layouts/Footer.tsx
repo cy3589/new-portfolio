@@ -44,6 +44,7 @@ const Footer = () => (
       >
         <Box position="relative">
           <IoLogoGithub
+            aria-label="git source code link"
             size={48}
             style={{
               top: '50%',

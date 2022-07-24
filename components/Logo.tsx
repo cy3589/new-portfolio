@@ -1,7 +1,7 @@
-import { Text, useColorModeValue } from '@chakra-ui/react';
+import { Text, useColorModeValue, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import ProfileImage from '@public/profile-image.jpg';
-import Image from 'next/image';
+// import ProfileImage from '@public/profile-image.jpg';
+// import Image from 'next/image';
 import NextLink from 'next/link';
 import { FC } from 'react';
 
@@ -26,7 +26,11 @@ const LogoBox = styled.span`
 const Logo: FC = () => (
   <NextLink href="/" scroll={false}>
     <LogoBox>
-      <Image src={ProfileImage} width={24} height={24} alt="logo" />
+      <Image
+        src="/profile-image.jpg"
+        style={{ width: '24px', height: '24px' }}
+        alt="logo"
+      />
       <Text
         color={useColorModeValue('gray.800', 'whiteAlpha.900')}
         fontFamily='M PLUS Rounded 1c", sans-serif'

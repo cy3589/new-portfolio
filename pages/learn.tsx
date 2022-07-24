@@ -4,7 +4,6 @@ import {
   Flex,
   Heading,
   ListItem,
-  SimpleGrid,
   Text,
   UnorderedList,
 } from '@chakra-ui/react';
@@ -90,7 +89,7 @@ export const getServerSideProps: GetServerSideProps = async (
     };
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error(error);
+    // console.error(error);
     return { notFound: true };
   }
 };

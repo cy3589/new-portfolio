@@ -6,6 +6,7 @@ import {
   ListItem,
   Spinner,
   UnorderedList,
+  List,
 } from '@chakra-ui/react';
 import P from '@components/styled/P';
 import { GetWorksFetcher } from '@fetchers/works';
@@ -46,10 +47,19 @@ const Works: FC = () => {
             <Heading size="md">{company}</Heading>
             <P mt="2">{period}</P>
             {work && work.length > 0 && (
-              <UnorderedList mt="2">
-                {work.map((w, i) => (
-                  <ListItem ml="4" key={i}>
-                    {w}
+              <UnorderedList>
+                {work.map(({ title, description }, i) => (
+                  <ListItem ml="4" key={i} mt="4">
+                    <Heading size="xs" mb="1">
+                      {title}
+                    </Heading>
+                    {description && description.length > 0 && (
+                      <List>
+                        {description.map((d, index) => (
+                          <ListItem key={index}>{`- ${d}`}</ListItem>
+                        ))}
+                      </List>
+                    )}
                   </ListItem>
                 ))}
               </UnorderedList>
@@ -77,7 +87,7 @@ export const getServerSideProps: GetServerSideProps = async (
     };
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error(error);
+    // console.error(error);
     return { notFound: true };
   }
 };

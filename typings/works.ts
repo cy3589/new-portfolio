@@ -1,7 +1,12 @@
+export interface Work {
+  title: string;
+  description: string[];
+}
+
 export interface Works {
   company: string;
   period: string;
-  work?: string[];
+  work?: Work[];
 }
 
 export interface GetWorksAxiosResult {

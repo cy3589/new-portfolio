@@ -21,7 +21,6 @@ const GridSkillImageItem = ({ src, title }: MainSkillImage) => (
           loading="lazy"
           objectFit="cover"
           layout="fill"
-          unoptimized
         />
       </SkillImageWrapper>
       <Badge fontSize={14} mt={4}>
