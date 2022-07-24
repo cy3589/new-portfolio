@@ -25,7 +25,8 @@
       "@hooks/*": ["hooks/*"],
       "@typings/*": ["typings/*"],
       "@fetchers/*": ["fetchers/*"],
-      "@queries/*": ["queries/*"]
+      "@queries/*": ["queries/*"],
+      "@config/*": ["config/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
