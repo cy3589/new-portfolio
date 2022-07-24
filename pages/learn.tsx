@@ -4,6 +4,7 @@ import {
   Flex,
   Heading,
   ListItem,
+  Spinner,
   Text,
   UnorderedList,
 } from '@chakra-ui/react';
@@ -16,7 +17,7 @@ import { dehydrate, QueryClient } from 'react-query';
 import { GetLearnFetcher } from '@fetchers/learn';
 
 const Learn: FC = () => {
-  const { data } = GetLean();
+  const { data, isLoading } = GetLean();
   const { traning, education } = useMemo(() => {
     const nullish = { traning: null, education: null };
     if (!data) return nullish;
@@ -24,6 +25,18 @@ const Learn: FC = () => {
     if (!data.learn.education && !data.learn.traning) return nullish;
     return data.learn;
   }, [data]);
+
+  if (isLoading)
+    return (
+      <Layout>
+        <Container>
+          <Flex justifyContent="center" h="3xs" alignItems="center">
+            <Spinner size="xl" />
+          </Flex>
+        </Container>
+      </Layout>
+    );
+
   if (!data || (!traning && !education))
     return (
       <Layout>
