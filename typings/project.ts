@@ -13,6 +13,7 @@ export interface ProjectsPreview {
 export interface Project {
   title: string;
   isTeam: boolean;
+  myRole?: string[];
   useSkills?: { front: string[]; back?: string[] };
   deploy?: { link: string };
   gitLink?: string;

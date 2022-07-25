@@ -97,6 +97,15 @@ const dummyProjects: { [id: string]: Project } = {
     title: 'Dokteuk',
     images: ['/dokteuk/dokteuk-thumbnail.png'],
     isTeam: true,
+    myRole: [
+      '게시글 무한스크롤 개발',
+      'Full-Text-Search를 위해 Firebase와 Algolria 연결',
+      'NextJS 프로젝트 초기 셋업',
+      '서버사이드 렌더링과 서버사이드 동작 함수 세팅',
+      '스크롤 복원 개발',
+      '리덕스 세팅, 서버사이드 리덕스 데이터 주입 및 컴포넌트 랩핑 세팅',
+      '가입 시 인증에 필요한 서류의 텍스트 파싱 기능 개발 서포트',
+    ],
     useSkills: {
       front: [
         'NextJS',
@@ -104,9 +113,9 @@ const dummyProjects: { [id: string]: Project } = {
         'Typescript',
         'Redux',
         'Redux-Toolkit',
-        'emotion',
+        'Emotion',
       ],
-      back: ['firebase'],
+      back: ['Firebase'],
     },
     gitLink: '',
     summary: 'NextJS를 기반으로 만든 커뮤니티 입니다',
@@ -130,13 +139,19 @@ const dummyProjects: { [id: string]: Project } = {
       '/show-me-the-feedback/show-me-the-feedback-image2.png',
     ],
     isTeam: true,
+    myRole: [
+      '백-프론트 연결 총괄',
+      '프론트엔드 기능개발 리드',
+      '게시글 작성, 수정 폼, 데이터페칭 개발',
+      '랜딩화면 데이터페칭, 기능 개발',
+    ],
     useSkills: {
       front: ['HTML', 'CSS', 'JAVASCRIPT'],
       back: ['NodeJS', 'Express', 'MongoDB', 'Mongoose'],
     },
     gitLink: 'github.com/cy3589/ShowMeTheFeedback',
     summary:
-      'HTML,CSS,JAVASCRIPT 만으로 만든 토이프로젝트 피드백 서비스 입니다',
+      'HTML, CSS, JAVASCRIPT 만으로 만든 토이프로젝트 피드백 서비스 입니다',
     description:
       '토이프로젝트를 업로드 하고 이에 대한 피드백을 주고받을 수 있는 웹 서비스 입니다.',
     whatILean: [

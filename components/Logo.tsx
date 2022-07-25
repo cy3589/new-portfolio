@@ -1,7 +1,5 @@
 import { Text, useColorModeValue, Image } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-// import ProfileImage from '@public/profile-image.jpg';
-// import Image from 'next/image';
 import NextLink from 'next/link';
 import { FC } from 'react';
 

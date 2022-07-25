@@ -14,15 +14,11 @@ const learn: Learn = {
 
 const learnHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!learn)
-    return res.status(403).json({
-      result: 'fail',
-      message: '데이터가 없습니다',
-    });
-  return res.status(201).json({
-    result: 'success',
-    message: '성공',
-    learn,
-  });
+    return res
+      .status(403)
+      .json({ result: 'fail', message: '데이터가 없습니다' });
+
+  return res.status(201).json({ result: 'success', message: '성공', learn });
 };
 
 export default learnHandler;
