@@ -18,11 +18,11 @@ import { GetLearnFetcher } from '@fetchers/learn';
 
 const Learn: FC = () => {
   const { data, isLoading } = GetLean();
-  const { traning, education } = useMemo(() => {
-    const nullish = { traning: null, education: null };
+  const { training, education } = useMemo(() => {
+    const nullish = { training: null, education: null };
     if (!data) return nullish;
     if (!data.learn) return nullish;
-    if (!data.learn.education && !data.learn.traning) return nullish;
+    if (!data.learn.education && !data.learn.training) return nullish;
     return data.learn;
   }, [data]);
 
@@ -37,7 +37,7 @@ const Learn: FC = () => {
       </Layout>
     );
 
-  if (!data || (!traning && !education))
+  if (!data || (!training && !education))
     return (
       <Layout>
         <Container>
@@ -50,11 +50,11 @@ const Learn: FC = () => {
   return (
     <Layout>
       <Container>
-        {traning && traning.length > 0 && (
+        {training && training.length > 0 && (
           <Box>
-            <Heading size="lg">Traning</Heading>
+            <Heading size="lg">Training</Heading>
             <UnorderedList ml="8" mt="2">
-              {traning.map(({ company, period }) => (
+              {training.map(({ company, period }) => (
                 <ListItem key={company}>
                   <Flex flexWrap="wrap">
                     <Text mr="1.5">{company}</Text>

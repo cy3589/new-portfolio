@@ -2,7 +2,7 @@ import { Learn } from '@typings/learn';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const learn: Learn = {
-  traning: [{ company: '엘리스 코딩 부트캠프', period: '2021.10 ~ 2022.02' }],
+  training: [{ company: '엘리스 코딩 부트캠프', period: '2021.10 ~ 2022.02' }],
   education: [
     {
       university: '단국대학교',

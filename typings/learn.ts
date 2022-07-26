@@ -1,4 +1,4 @@
-export interface Traning {
+export interface Training {
   company: string;
   period: string;
 }
@@ -8,7 +8,7 @@ export interface Education {
   period: string;
 }
 export interface Learn {
-  traning?: Traning[];
+  training?: Training[];
   education?: Education[];
 }
 
