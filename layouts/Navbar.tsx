@@ -98,9 +98,9 @@ const Navbar = (props: any) => {
           <LinkItem href="/works" path={path}>
             Works
           </LinkItem>
-          <LinkItem href="/algorithm" path={path}>
+          {/* <LinkItem href="/algorithm" path={path}>
             Algorithm
-          </LinkItem>
+          </LinkItem> */}
           <LinkItem
             href="https://github.com/cy3589"
             target="_blank"
@@ -139,9 +139,9 @@ const Navbar = (props: any) => {
                   <StyledLink href="/works" passHref>
                     <MenuItem as={Link}>Works</MenuItem>
                   </StyledLink>
-                  <StyledLink href="/algorithm" passHref>
+                  {/* <StyledLink href="/algorithm" passHref>
                     <MenuItem as={Link}>Algorithm</MenuItem>
-                  </StyledLink>
+                  </StyledLink> */}
                 </MenuList>
               </Menu>
             </Box>
