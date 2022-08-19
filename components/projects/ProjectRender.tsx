@@ -38,13 +38,17 @@ const ProjectRender: FC<ProjectRenderProps> = ({
     images,
     myRole,
     useSkills,
+    isCompanyProject,
   }: Project = useMemo(() => data, [data]);
   return (
     <Box>
       <Heading>{title}</Heading>
-      <Heading mt="2" fontSize="xl" as="p">{`${
-        isTeam ? '팀' : '개인'
-      }프로젝트`}</Heading>
+      {!isCompanyProject && (
+        <Heading mt="2" fontSize="xl" as="p">{`${
+          isTeam ? '팀' : '개인'
+        }프로젝트`}</Heading>
+      )}
+
       {useSkills && (
         <Box>
           <Box alignItems="center" my={4}>
@@ -88,12 +92,14 @@ const ProjectRender: FC<ProjectRenderProps> = ({
           </Flex>
         )}
       </Flex>
-      <Flex mt="2">
-        <Text mr="2">Git: </Text>
-        <Link target="_blank" href={gitLink}>
-          {gitLink}
-        </Link>
-      </Flex>
+      {!isCompanyProject && (
+        <Flex mt="2">
+          <Text mr="2">Git: </Text>
+          <Link target="_blank" href={gitLink}>
+            {gitLink}
+          </Link>
+        </Flex>
+      )}
       <Flex mt="4" flexDirection="column">
         <Heading fontSize="xl">summary</Heading>
         <Text mt="2">{summary}</Text>

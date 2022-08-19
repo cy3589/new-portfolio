@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import type { AppContext, AppInitialProps, AppProps } from 'next/app';
+import type { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import { QueryClientProvider, QueryClient, Hydrate } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -36,17 +36,6 @@ const App = ({ Component, pageProps, router }: AppProps) => {
       </AppLayout>
     </ChakraProvider>
   );
-};
-App.getInitialProps = async ({
-  Component,
-  ctx,
-}: AppContext): Promise<AppInitialProps> => {
-  let pageProps = {};
-
-  if (Component.getInitialProps) {
-    pageProps = await Component.getInitialProps(ctx);
-  }
-  return { pageProps };
 };
 
 export default App;

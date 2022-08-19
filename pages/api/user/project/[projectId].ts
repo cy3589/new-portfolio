@@ -1,7 +1,51 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import type { Project } from '@typings/project';
 
+// {
+//   thumbNailSrc: '/watch-treasurer/watch-treasurer-thumbnail.png',
+//   title: 'Treasurer-Watch',
+//   id: '16580510039129',
+// },
+
 const dummyProjects: { [id: string]: Project } = {
+  '16580510039129': {
+    title: 'Treasurer-Watch',
+    images: [
+      '/watch-treasurer/watch-treasurer-thumbnail.png',
+      '/watch-treasurer/watch-treasurer-image0.png',
+      '/watch-treasurer/watch-treasurer-image1.png',
+      '/watch-treasurer/watch-treasurer-image2.png',
+      '/watch-treasurer/watch-treasurer-image3.png',
+      '/watch-treasurer/watch-treasurer-image4.png',
+      '/watch-treasurer/watch-treasurer-image5.png',
+    ],
+    isTeam: false,
+    isCompanyProject: true,
+    useSkills: {
+      front: [
+        'NextJS',
+        'ReactJS',
+        'Typescript',
+        'react-query',
+        'emotion',
+        'framer-motion',
+        'chakra-ui',
+        'masonic',
+      ],
+      back: ['NodeJS', 'NestJS', 'mySQL', 'Prisma', 'Typescript'],
+    },
+    deploy: { link: 'watch.treasurer.co.kr' },
+    gitLink: '',
+    summary: '시계 데이터를 보여주는 웹 서비스 입니다.',
+    description:
+      'NextJS를 기반으로 만들었으며 인터렉티브한 효과와 데이터 시각화에 초점을 맞추어 만든 웹 서비스 입니다.',
+    whatILean: [
+      'framer-motion을 이용한 React 환경에서의 다양한 애니메이션 효과를 구현하는 방법을 알게되었습니다',
+      '디자인을 편하게 도와주는 Chakra-UI에 대한 사용방법과 tailwind와 같은 css프레임워크를 왜 쓰는지 알게되었습니다',
+      'NextJS의 서버사이드 함수와 react-query와의 연동, 하이드레이션에 대해 더 잘 알게되었습니다',
+      'NestJS와 Prisma를 경험하며 ORM의 연동, Typescript가 적용되면 안정성있는 서비스가 구현됨을 알게되었습니다',
+    ],
+  },
   '16580510039130': {
     title: 'NodeBird',
     images: [
