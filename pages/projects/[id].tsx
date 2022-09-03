@@ -1,14 +1,6 @@
 import { FC, useMemo } from 'react';
-import {
-  Box,
-  Container,
-  Spinner,
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
-} from '@chakra-ui/react';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { Box, Container, Spinner } from '@chakra-ui/react';
+import { GetStaticProps, GetStaticPropsContext, GetStaticPaths } from 'next';
 import { QueryClient, dehydrate } from 'react-query';
 import { useRouter } from 'next/router';
 
@@ -16,6 +8,7 @@ import Layout from '@layouts/Layout';
 import { GetProjectFetcher } from '@fetchers/project';
 import { GetProject } from '@queries/project';
 import ProjectRender from '@components/projects/ProjectRender';
+import NotFound from '@pages/404';
 
 const Project: FC = () => {
   const router = useRouter();
@@ -36,22 +29,7 @@ const Project: FC = () => {
             />
           </Box>
         );
-      if (isError || !data)
-        return (
-          <Alert status="error" display="flex" flexDirection="column">
-            <AlertIcon boxSize={10} />
-            <AlertTitle>잘못된 요청입니다</AlertTitle>
-            <AlertDescription>
-              페이지의 주소가 잘못 입력되었거나,
-            </AlertDescription>
-            <AlertDescription>
-              변경 혹은 삭제되어 요청하신 페이지를 찾을 수 없습니다.
-            </AlertDescription>
-            <AlertDescription>
-              입력하신 페이지 주소를 다시 한번 확인해 주세요.
-            </AlertDescription>
-          </Alert>
-        );
+      if (isError || !data) return <NotFound />;
     }
     return <ProjectRender data={data.project} />;
   }, [data, isError, isLoading]);
@@ -62,10 +40,18 @@ const Project: FC = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext,
+export const getStaticPaths: GetStaticPaths = async () => {
+  // eslint-disable-next-line import/extensions
+  const myProjects = await import('../../myDatas').then(
+    (module) => module.default,
+  );
+  const ids = Object.keys(myProjects).map((id) => ({ params: { id } }));
+  return { paths: ids, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps = async (
+  ctx: GetStaticPropsContext,
 ) => {
-  if (ctx.req.headers.referer) return { props: {} };
   const queryClient = new QueryClient({
     defaultOptions: { queries: { refetchOnWindowFocus: false } },
   });

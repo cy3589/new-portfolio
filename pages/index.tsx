@@ -1,8 +1,4 @@
-import type {
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  NextPage,
-} from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import { Box, Container, FormErrorIcon, Spinner } from '@chakra-ui/react';
 
 import Layout from '@layouts/Layout';
@@ -48,10 +44,7 @@ const Home: NextPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext,
-) => {
-  if (ctx.req.headers.referer) return { props: {} }; // 첫 방문이 아니라면 prefetch 하지 않음
+export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { refetchOnWindowFocus: false } },
   });
@@ -64,7 +57,7 @@ export const getServerSideProps: GetServerSideProps = async (
     };
   } catch (error) {
     // eslint-disable-next-line no-console
-    // console.error(error);
+    console.error(error);
     return { notFound: true };
   }
 };

@@ -12,7 +12,7 @@ import P from '@components/styled/P';
 import { GetWorksFetcher } from '@fetchers/works';
 import Layout from '@layouts/Layout';
 import { GetWorks } from '@queries/works';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { GetStaticProps } from 'next';
 import { FC, useMemo } from 'react';
 import { dehydrate, QueryClient } from 'react-query';
 
@@ -71,10 +71,7 @@ const Works: FC = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext,
-) => {
-  if (ctx.req.headers.referer) return { props: {} }; // 첫 방문이 아니라면 prefetch 하지 않음
+export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { refetchOnWindowFocus: false } },
   });

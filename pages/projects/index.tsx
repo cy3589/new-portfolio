@@ -3,7 +3,7 @@ import Layout from '@layouts/Layout';
 import { FC } from 'react';
 import GridProjectItem from '@components/projects/GridProjectItem';
 import { GetProjects } from '@queries/project';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { GetStaticProps } from 'next';
 import { dehydrate, QueryClient } from 'react-query';
 import { GetProjectsFetcher } from '@fetchers/project';
 
@@ -30,10 +30,7 @@ const Projects: FC = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext,
-) => {
-  if (ctx.req.headers.referer) return { props: {} };
+export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { refetchOnWindowFocus: false } },
   });
@@ -46,8 +43,8 @@ export const getServerSideProps: GetServerSideProps = async (
     };
   } catch (error) {
     // eslint-disable-next-line no-console
-    // console.error(error);
-    return { notFound: true };
+    console.error(error);
+    return { props: {} };
   }
 };
 

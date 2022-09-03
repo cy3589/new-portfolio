@@ -12,7 +12,7 @@ import { FC, useMemo } from 'react';
 
 import Layout from '@layouts/Layout';
 import { GetLean } from '@queries/learn';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { GetStaticProps } from 'next';
 import { dehydrate, QueryClient } from 'react-query';
 import { GetLearnFetcher } from '@fetchers/learn';
 
@@ -86,10 +86,7 @@ const Learn: FC = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext,
-) => {
-  if (ctx.req.headers.referer) return { props: {} }; // 첫 방문이 아니라면 prefetch 하지 않음
+export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { refetchOnWindowFocus: false } },
   });
