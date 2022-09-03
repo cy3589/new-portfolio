@@ -31,13 +31,13 @@ const Footer = () => (
       로 제작되었습니다.
     </Text>
     <NextLink
-      href="https://github.com/cy3589/new-port-folio"
+      href="https://github.com/cy3589/new-portfolio"
       passHref
       scroll={false}
       target="_blank"
     >
       <Link
-        href="https://github.com/cy3589/new-port-folio"
+        href="https://github.com/cy3589/new-portfolio"
         justifyContent="center"
         target="_blank"
         p={1}
