@@ -1,5 +1,6 @@
 const sharp = require('sharp');
 const fs = require('fs');
+
 const directory = './public/test';
 
 fs.readdirSync(directory).forEach((file) => {

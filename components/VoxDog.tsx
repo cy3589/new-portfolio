@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { loadGLTFModel } from '@utils/model';
+import loadGLTFModel from '@utils/model';
 import { DogSpinner, DogContainer } from '@components/VoxDogLoader';
 
 const easeOutCirc = (x: number) => Math.sqrt(1 - (x - 1) ** 4);

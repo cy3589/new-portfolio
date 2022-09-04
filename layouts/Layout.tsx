@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import Head from 'next/head';
-import { motion, Transition, Variants } from 'framer-motion';
+import { motion, Transition } from 'framer-motion';
 
 interface LayoutProps {
   children?: ReactNode | ReactNode[];

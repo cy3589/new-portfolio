@@ -1,7 +1,8 @@
+/* eslint-disable no-param-reassign */
 import { Mesh, Scene } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-export const loadGLTFModel = (
+const loadGLTFModel = (
   scene: Scene,
   glbPath: string,
   options = { receiveShadow: true, castShadow: true },
@@ -33,3 +34,4 @@ export const loadGLTFModel = (
       },
     );
   });
+export default loadGLTFModel;
