@@ -7,7 +7,7 @@ import MainSimpleInfo from '@components/Main/MainSimpleInfo';
 import PersonalInfo from '@components/Main/PersonalInfo';
 import Introduce from '@components/Main/Introduce';
 import Skill from '@components/Main/Skill';
-import { dehydrate, QueryClient } from 'react-query';
+import { dehydrate, DehydratedState, QueryClient } from 'react-query';
 import { GetUserInfo } from '@queries/info';
 import { GetUserInfoFetcher } from '@fetchers/userInfo';
 
@@ -52,7 +52,9 @@ export const getStaticProps: GetStaticProps = async () => {
     await queryClient.prefetchQuery(['user', 'info'], GetUserInfoFetcher);
     return {
       props: {
-        dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+        dehydratedState: JSON.parse(
+          JSON.stringify(dehydrate(queryClient)),
+        ) as DehydratedState,
       },
     };
   } catch (error) {

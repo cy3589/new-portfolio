@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 import { Box, Container, Spinner } from '@chakra-ui/react';
 import { GetStaticProps, GetStaticPropsContext, GetStaticPaths } from 'next';
-import { QueryClient, dehydrate } from 'react-query';
+import { QueryClient, dehydrate, DehydratedState } from 'react-query';
 import { useRouter } from 'next/router';
 
 import Layout from '@layouts/Layout';
@@ -64,7 +64,9 @@ export const getStaticProps: GetStaticProps = async (
     );
     return {
       props: {
-        dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+        dehydratedState: JSON.parse(
+          JSON.stringify(dehydrate(queryClient)),
+        ) as DehydratedState,
       },
     };
   } catch (error) {

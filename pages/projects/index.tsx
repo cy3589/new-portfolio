@@ -4,7 +4,7 @@ import { FC } from 'react';
 import GridProjectItem from '@components/projects/GridProjectItem';
 import { GetProjects } from '@queries/project';
 import { GetStaticProps } from 'next';
-import { dehydrate, QueryClient } from 'react-query';
+import { dehydrate, DehydratedState, QueryClient } from 'react-query';
 import { GetProjectsFetcher } from '@fetchers/project';
 
 const Projects: FC = () => {
@@ -38,7 +38,9 @@ export const getStaticProps: GetStaticProps = async () => {
     await queryClient.prefetchQuery(['user', 'projects'], GetProjectsFetcher);
     return {
       props: {
-        dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+        dehydratedState: JSON.parse(
+          JSON.stringify(dehydrate(queryClient)),
+        ) as DehydratedState,
       },
     };
   } catch (error) {

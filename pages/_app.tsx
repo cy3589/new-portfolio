@@ -1,22 +1,35 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
-import { QueryClientProvider, QueryClient, Hydrate } from 'react-query';
+import {
+  QueryClientProvider,
+  QueryClient,
+  Hydrate,
+  DehydratedState,
+} from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { AnimatePresence } from 'framer-motion';
 import AppLayout from '@layouts/AppLayout';
-import theme from '@utils/theme';
 import Fonts from '@utils/fonts';
 import { useRef } from 'react';
+import Chakra from '@components/Chakra';
 
-const App = ({ Component, pageProps, router }: AppProps) => {
+interface AppPageProps {
+  cookies?: string;
+  dehydratedState?: DehydratedState;
+}
+
+interface MyAppProps extends AppProps {
+  pageProps: AppPageProps;
+}
+
+const App = ({ Component, pageProps, router }: MyAppProps) => {
   const queryClientRef = useRef<QueryClient>();
   if (!queryClientRef.current)
     queryClientRef.current = new QueryClient({
       defaultOptions: { queries: { refetchOnWindowFocus: false } },
     });
   return (
-    <ChakraProvider theme={theme}>
+    <Chakra cookies={pageProps.cookies}>
       <Fonts />
       <AppLayout router={router}>
         <AnimatePresence
@@ -34,8 +47,10 @@ const App = ({ Component, pageProps, router }: AppProps) => {
           </QueryClientProvider>
         </AnimatePresence>
       </AppLayout>
-    </ChakraProvider>
+    </Chakra>
   );
 };
+
+export { getServerSideProps } from '@components/Chakra';
 
 export default App;

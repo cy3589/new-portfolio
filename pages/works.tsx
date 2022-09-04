@@ -14,7 +14,7 @@ import Layout from '@layouts/Layout';
 import { GetWorks } from '@queries/works';
 import { GetStaticProps } from 'next';
 import { FC, useMemo } from 'react';
-import { dehydrate, QueryClient } from 'react-query';
+import { dehydrate, DehydratedState, QueryClient } from 'react-query';
 
 const Works: FC = () => {
   const { data, isLoading } = GetWorks();
@@ -79,7 +79,9 @@ export const getStaticProps: GetStaticProps = async () => {
     await queryClient.prefetchQuery(['user', 'works'], GetWorksFetcher);
     return {
       props: {
-        dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+        dehydratedState: JSON.parse(
+          JSON.stringify(dehydrate(queryClient)),
+        ) as DehydratedState,
       },
     };
   } catch (error) {

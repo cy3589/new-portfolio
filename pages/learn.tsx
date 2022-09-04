@@ -13,7 +13,7 @@ import { FC, useMemo } from 'react';
 import Layout from '@layouts/Layout';
 import { GetLean } from '@queries/learn';
 import { GetStaticProps } from 'next';
-import { dehydrate, QueryClient } from 'react-query';
+import { dehydrate, DehydratedState, QueryClient } from 'react-query';
 import { GetLearnFetcher } from '@fetchers/learn';
 
 const Learn: FC = () => {
@@ -94,7 +94,9 @@ export const getStaticProps: GetStaticProps = async () => {
     await queryClient.prefetchQuery(['user', 'learn'], GetLearnFetcher);
     return {
       props: {
-        dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+        dehydratedState: JSON.parse(
+          JSON.stringify(dehydrate(queryClient)),
+        ) as DehydratedState,
       },
     };
   } catch (error) {
