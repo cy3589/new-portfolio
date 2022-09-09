@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
-import Head from 'next/head';
 import { motion, Transition } from 'framer-motion';
+import { NextSeo } from 'next-seo';
 
 interface LayoutProps {
   children?: ReactNode | ReactNode[];
@@ -13,7 +13,7 @@ const Layout: FC<LayoutProps & Transition> = ({
   duration = 0.4,
   ...transitionProps
 }) => {
-  const myTitle = `${title} - Chad`;
+  const myTitle = title ? `${title} - Chad` : "Chad's Portfolio";
   return (
     <motion.article
       initial={{ opacity: 0, x: 0, y: 20 }}
@@ -24,13 +24,7 @@ const Layout: FC<LayoutProps & Transition> = ({
       style={{ position: 'relative' }}
     >
       <>
-        {title && (
-          <Head>
-            <title>{myTitle}</title>
-            <meta name="twitter:title" content={myTitle} />
-            <meta property="og:title" content={myTitle} />
-          </Head>
-        )}
+        {title && <NextSeo openGraph={{ title: myTitle }} />}
         {children}
       </>
     </motion.article>

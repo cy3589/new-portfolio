@@ -8,6 +8,7 @@ import {
 } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { AnimatePresence } from 'framer-motion';
+
 import AppLayout from '@layouts/AppLayout';
 import Fonts from '@utils/fonts';
 import { useRef } from 'react';

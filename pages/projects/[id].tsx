@@ -34,7 +34,7 @@ const Project: FC = () => {
     return <ProjectRender data={data.project} />;
   }, [data, isError, isLoading]);
   return (
-    <Layout>
+    <Layout title={data?.project.title}>
       <Container>{renderData}</Container>
     </Layout>
   );
