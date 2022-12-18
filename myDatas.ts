@@ -1,12 +1,30 @@
 import type { Project } from 'typings/project';
 
-// {
-//   thumbNailSrc: '/watch-treasurer/watch-treasurer-thumbnail.png',
-//   title: 'Treasurer-Watch',
-//   id: '16580510039129',
-// },
-
 const myProjects: { [id: string]: Project } = {
+  '16580510039139': {
+    title: 'ClassU-Awards',
+    images: [
+      '/classu-awards/classu-awards-image0.jpg',
+      '/classu-awards/classu-awards-image1.jpg',
+      '/classu-awards/classu-awards-image2.jpg',
+      '/classu-awards/classu-awards-image3.jpg',
+    ],
+    isTeam: false,
+    isCompanyProject: true,
+    useSkills: {
+      front: ['NextJS', 'Typescript', 'emotion', 'tailwindCSS', 'swiper'],
+    },
+    deploy: { link: 'https://event.classu.co.kr/awards' },
+    gitLink: '',
+    summary: '연말 이벤트 페이지 입니다.',
+    description:
+      'NextJS를 기반으로 만들었으며 옆으로 흐르는 재밌는 효과와 디자인에 초점을 맞춘 이벤트페이지 입니다.',
+    whatILean: [
+      'tailwindCSS와  twin.macro의 사용법을 알게되었습니다.',
+      'SSG를 이용하기 위해 NextJS의 getStaticPaths, getStaticProps의 사용법을 자세히 알게되었습니다.',
+      '디자인이나 기획의 잦은 변화에 대응하기 쉬운 구조에 대해 생각해 볼 수 있었습니다.',
+    ],
+  },
   '16580510039129': {
     title: 'Treasurer-Watch',
     images: [
