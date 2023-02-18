@@ -121,7 +121,7 @@ const myProjects: { [id: string]: Project } = {
       ],
     },
     // deploy: { link: 'https://sleact.cy3589.com' },
-    gitLink: 'github.com/cy3589/sleact-react-query',
+    gitLink: 'https://github.com/cy3589/sleact-react-query',
     summary: 'NextJS를 기반으로 만든 슬랙의 클론코딩 입니다',
     whatILean: [
       'React-Query를 프로젝트에 적용해보며 비슷한 구조임에도 짧아지는 코드량을 경험하였습니다.',
@@ -210,7 +210,7 @@ const myProjects: { [id: string]: Project } = {
       front: ['HTML', 'CSS', 'JAVASCRIPT'],
       back: ['NodeJS', 'Express', 'MongoDB', 'Mongoose'],
     },
-    gitLink: 'github.com/cy3589/ShowMeTheFeedback',
+    gitLink: 'https://github.com/cy3589/ShowMeTheFeedback',
     summary:
       'HTML, CSS, JAVASCRIPT 만으로 만든 토이프로젝트 피드백 서비스 입니다',
     description:

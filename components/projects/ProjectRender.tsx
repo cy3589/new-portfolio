@@ -86,7 +86,7 @@ const ProjectRender: FC<ProjectRenderProps> = ({
         {deploy && (
           <Flex mt="2">
             <Text mr="2">배포링크:</Text>
-            <Link target="_blank" href={deploy.link}>
+            <Link as="a" target="_blank" rel="noreferrer" href={deploy.link}>
               {deploy.link}
             </Link>
           </Flex>
