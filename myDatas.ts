@@ -178,7 +178,7 @@ const myProjects: { [id: string]: Project } = {
       ],
       back: ['Firebase'],
     },
-    gitLink: '',
+    gitLink: 'https://github.com/cy3589/dokteuk',
     summary: 'NextJS를 기반으로 만든 커뮤니티 입니다',
     description:
       '블라인드를 벤치마킹 하여 자영업자, 비정규직 등의 블라인드 가입이 어려운 유저를 위한 익명 커뮤니티 입니다.',
