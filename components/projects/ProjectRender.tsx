@@ -95,7 +95,7 @@ const ProjectRender: FC<ProjectRenderProps> = ({
       {!isCompanyProject && (
         <Flex mt="2">
           <Text mr="2">Git: </Text>
-          <Link target="_blank" href={gitLink}>
+          <Link as="a" target="_blank" rel="noreferrer" href={gitLink}>
             {gitLink}
           </Link>
         </Flex>
