@@ -19,7 +19,7 @@ const Projects: FC = () => {
     <Layout>
       <Container>
         <Heading as="h3" fontSize={20} mb={6}>
-          Company Projects
+          Work Projects
         </Heading>
         <SimpleGrid columns={[1, 2, 2]} gap={6}>
           {companyProjects?.map(({ thumbNailSrc, title, id }) => (
