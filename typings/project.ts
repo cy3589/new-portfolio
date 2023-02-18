@@ -3,11 +3,13 @@ export interface GridProjectItemProps {
   thumbNailAlt?: string;
   title: string;
   id: string;
+  isCompanyProject?: true;
 }
 export interface ProjectsPreview {
   thumbNailSrc: string;
   title: string;
   id: string;
+  isCompanyProject?: true;
 }
 
 export interface Project {
