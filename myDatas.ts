@@ -82,7 +82,7 @@ const myProjects: { [id: string]: Project } = {
       ],
       back: ['NodeJS', 'mySQL', 'sequelize', 'passport', 'bcrypt'],
     },
-    deploy: { link: 'https://nodebird.cy3589.com' },
+    // deploy: { link: 'https://nodebird.cy3589.com' },
     gitLink: 'https://github.com/cy3589/NodeBird__',
     summary:
       'NextJS를 기반으로 만든 트위터와 비슷한 기능을 하는 SNS 웹 서비스 입니다.',
@@ -120,7 +120,7 @@ const myProjects: { [id: string]: Project } = {
         'socket',
       ],
     },
-    deploy: { link: 'https://sleact.cy3589.com' },
+    // deploy: { link: 'https://sleact.cy3589.com' },
     gitLink: 'github.com/cy3589/sleact-react-query',
     summary: 'NextJS를 기반으로 만든 슬랙의 클론코딩 입니다',
     whatILean: [
