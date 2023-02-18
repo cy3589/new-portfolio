@@ -3,6 +3,16 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const works: Works[] = [
   {
+    company: 'ClassU',
+    period: '2022.11.21 ~ Present',
+    work: [
+      {
+        title: 'Next.js',
+        description: ['앱 내 웹뷰 페이지 개발', '신규 이벤트페이지 개발'],
+      },
+    ],
+  },
+  {
     company: 'Treasurer',
     period: '2022.04.25 ~ 2022.11',
     work: [
@@ -20,16 +30,6 @@ const works: Works[] = [
       },
       { title: 'React-Native', description: ['화면개발'] },
       { title: 'AWS', description: ['타사 API 연동을 위한 Lambda 개발'] },
-    ],
-  },
-  {
-    company: 'ClassU',
-    period: '2022.11.21 ~ Present',
-    work: [
-      {
-        title: 'Next.js',
-        description: ['앱 내 웹뷰 페이지 개발', '신규 이벤트페이지 개발'],
-      },
     ],
   },
 ];
