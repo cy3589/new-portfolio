@@ -8,7 +8,10 @@ const works: Works[] = [
     work: [
       {
         title: 'Next.js',
-        description: ['앱 내 웹뷰 페이지 개발', '신규 이벤트페이지 개발'],
+        description: [
+          '강사와 학생의 연결을 강화하기 위한 자체 커뮤니티 프로젝트 개발',
+          '신규 이벤트페이지 개발',
+        ],
       },
     ],
   },

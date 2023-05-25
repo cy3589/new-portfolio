@@ -14,7 +14,7 @@ const myProjects: { [id: string]: Project } = {
     useSkills: {
       front: ['NextJS', 'Typescript', 'emotion', 'tailwindCSS', 'swiper'],
     },
-    deploy: { link: 'https://event.classu.co.kr/awards' },
+    // deploy: { link: 'https://event.classu.co.kr/awards' },
     gitLink: '',
     summary: '연말 이벤트 페이지 입니다.',
     description:
@@ -51,7 +51,7 @@ const myProjects: { [id: string]: Project } = {
       ],
       back: ['NodeJS', 'NestJS', 'mySQL', 'Prisma', 'Typescript'],
     },
-    deploy: { link: 'https://watch.treasurer.co.kr' },
+    // deploy: { link: 'https://watch.treasurer.co.kr' },
     gitLink: '',
     summary: '시계 데이터를 보여주는 웹 서비스 입니다.',
     description:
