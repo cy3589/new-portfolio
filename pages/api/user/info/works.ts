@@ -21,6 +21,10 @@ const works: Works[] = [
           '액세스토큰관리 및 리프레쉬 관리',
         ],
       },
+      {
+        title: 'Docker',
+        description: ['B2B 솔루션의 백엔드 배포영역 EC2의 Dockerising'],
+      },
     ],
   },
   {
