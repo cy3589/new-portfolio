@@ -3,6 +3,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const UserProjects: ProjectsPreview[] = [
   {
+    thumbNailSrc: '/classu-b2b/classu-b2b-thumbnail.jpg',
+    title: 'ClassU B2B',
+    id: '1658051003913931',
+    isCompanyProject: true,
+  },
+  {
     thumbNailSrc: '/classu-awards/classu-awards-thumbnail.jpg',
     title: 'ClassU Awards',
     id: '16580510039139',

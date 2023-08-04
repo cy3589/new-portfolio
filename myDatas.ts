@@ -1,6 +1,26 @@
 import type { Project } from 'typings/project';
 
 const myProjects: { [id: string]: Project } = {
+  '1658051003913931': {
+    title: 'ClassU-B2B',
+    images: ['/classu-b2b/classu-b2b-thumbnail.jpg'],
+    isTeam: false,
+    isCompanyProject: true,
+    useSkills: {
+      front: ['NextJS', 'Typescript', 'emotion', 'MUI', 'AWS Amplify'],
+      back: ['NestJS', 'Typescript', 'Prisma', 'mySQL', 'AWS EC2', 'Docker'],
+    },
+    // deploy: { link: 'https://event.classu.co.kr/awards' },
+    gitLink: '',
+    summary: 'B2B 서비스 관리를 위한 백오피스 입니다.',
+    description:
+      'NestJS, NextJS, Prisma, mySQL, Docker를 활용하여 만들어진 B2B 솔루션입니다.',
+    whatILean: [
+      'Docker의 사용법과 쓰는 이유를 알게되었습니다.',
+      '얕게만 알고있던 SQL문법과 쿼리성능에 대해 더 자세히 알게되었습니다.',
+      'NestJS에서 채택한 Module, Controller, Service 구조의 사용법을 알게되었습니다.',
+    ],
+  },
   '16580510039139': {
     title: 'ClassU-Awards',
     images: [
