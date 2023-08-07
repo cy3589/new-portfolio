@@ -8,11 +8,14 @@ import PersonalInfo from '@components/Main/PersonalInfo';
 import Introduce from '@components/Main/Introduce';
 import Skill from '@components/Main/Skill';
 import { dehydrate, DehydratedState, QueryClient } from 'react-query';
-import { GetUserInfo } from '@queries/info';
+import { GetSolvedACUserInfo, GetUserInfo } from '@queries/info';
 import { GetUserInfoFetcher } from '@fetchers/userInfo';
 
 const Home: NextPage = () => {
   const { data, isLoading } = GetUserInfo();
+  const { data: solvedACInfo } = GetSolvedACUserInfo({
+    userId: data?.info ? 'jcy3589' : '',
+  });
   const info = useMemo(() => data?.info ?? null, [data]);
   if (isLoading)
     return (
@@ -36,7 +39,12 @@ const Home: NextPage = () => {
     <Layout>
       <Container>
         <MainSimpleInfo mainSimpleInfo={info.mainSimpleInfo} />
-        <PersonalInfo name={info.name} phone={info.phone} email={info.email} />
+        <PersonalInfo
+          name={info.name}
+          phone={info.phone}
+          email={info.email}
+          solvedACInfo={solvedACInfo}
+        />
         <Introduce simpleInfo={info.simpleInfo} introduces={info.introduces} />
         <Skill skill={info.skill} />
       </Container>
