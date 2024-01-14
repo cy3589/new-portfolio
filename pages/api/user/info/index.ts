@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const info: { [_ in string]: UserInfo } = {
   '1': {
-    mainSimpleInfo: "Hi, I'm Junior FrontEnd Developer",
+    mainSimpleInfo: "Hi, I'm FrontEnd Developer",
     name: 'Chad',
     phone: '010-2102-3589',
     email: 'jcy3589@gmail.com',
