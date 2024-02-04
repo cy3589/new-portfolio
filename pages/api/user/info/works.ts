@@ -3,6 +3,22 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const works: Works[] = [
   {
+    company: 'Glyde',
+    period: '2024.1 ~ Present',
+    work: [
+      {
+        title: 'React.js, Next.js',
+        description: [
+          '자사 커머스 서비스의 유지보수',
+          'Java기반 MPA 서비스를 Next.js기반의 서비스로 점진적 전환',
+          'Javascript 기반의 소스코드를 Typescript로 전환하고 API 응답의 강한 Typing을 적용하여 안정성 확보',
+          '정적 Layout에 대해 ServerComponent 적용으로 FCP를 개선',
+          '인터렉티브 UI의 css를 transform 적용으로 CLS를 개선(LightHouse CLS Score 44 -> 79)',
+        ],
+      },
+    ],
+  },
+  {
     company: 'ClassU',
     period: '2022.11 ~ 2024.1',
     work: [
