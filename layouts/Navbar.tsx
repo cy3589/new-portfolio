@@ -98,9 +98,6 @@ const Navbar = (props: any) => {
           <LinkItem href="/works" path={path}>
             Works
           </LinkItem>
-          {/* <LinkItem href="/algorithm" path={path}>
-            Algorithm
-          </LinkItem> */}
           <LinkItem
             href="https://github.com/cy3589"
             target="_blank"
@@ -113,6 +110,9 @@ const Navbar = (props: any) => {
           >
             <IoLogoGithub />
             Git
+          </LinkItem>
+          <LinkItem href="/typescript-challenge" path={path}>
+            TS-Challenge
           </LinkItem>
         </Stack>
         <Menu>
@@ -139,9 +139,9 @@ const Navbar = (props: any) => {
                   <StyledLink href="/works" passHref>
                     <MenuItem as={Link}>Works</MenuItem>
                   </StyledLink>
-                  {/* <StyledLink href="/algorithm" passHref>
-                    <MenuItem as={Link}>Algorithm</MenuItem>
-                  </StyledLink> */}
+                  <StyledLink href="/typescript-challenge" passHref>
+                    <MenuItem as={Link}>TS-Challenge</MenuItem>
+                  </StyledLink>
                 </MenuList>
               </Menu>
             </Box>

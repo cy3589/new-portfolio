@@ -1,3 +1,5 @@
+/* eslint-disable no-template-curly-in-string */
+import { TSChallenge } from '@typings/ts-challenge';
 import type { Project } from 'typings/project';
 
 const myProjects: { [id: string]: Project } = {
@@ -242,5 +244,187 @@ const myProjects: { [id: string]: Project } = {
     ],
   },
 };
+
+const myTSChallenges: TSChallenge[] = [
+  {
+    title: 'PercentageParser',
+    id: '01978',
+    code: [
+      "type ReverseString<S extends string, L extends string = ''> = S extends `${infer First}${infer Rest}` ? ReverseString<Rest,`${First}${L}`> : L;",
+      'type FirstChar<S extends string> = S extends `${infer First}${infer Rest}` ? First : S;',
+      'type LastChar<S extends string> = FirstChar<ReverseString<S>>;',
+      'type CurFirst<S extends string> = S extends `${infer First}${infer Rest}` ? Rest : S;',
+      'type CurLast<S extends string> = ReverseString<CurFirst<ReverseString<S>>>;',
+      '',
+      'type PercentageParser<A extends string> =',
+      '  FirstChar<A> extends "+"|"-"',
+      '    ? LastChar<A> extends "%"',
+      '      ? [FirstChar<A>,CurLast<CurFirst<A>>,LastChar<A>]',
+      "      : [FirstChar<A>,CurFirst<A>, '']",
+      '    : LastChar<A> extends "%"',
+      "      ? ['', CurLast<A>,LastChar<A>]",
+      "      : ['',A,'']",
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/01978-medium-percentage-parser/README.ko.md',
+  },
+  {
+    title: 'ReturnType',
+    id: '00002',
+    code: 'MyReturnType<T extends (...args:any[])=>any> = T extends (...args:any[])=> infer U ? U : never;',
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00002-medium-return-type/README.ko.md',
+  },
+  {
+    title: 'Reverse',
+    id: '03192',
+    code: [
+      "type ReverseImplements<T extends any[], U extends any[] = []> = T['length'] extends 0 ? U :",
+      'T extends [infer First, ...infer Rest] ? ReverseImplements<Rest, [First, ...U]> : never;',
+      'type Reverse<T extends any[]> = ReverseImplements<T>',
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/03192-medium-reverse/README.md',
+  },
+  {
+    title: 'ValidBracket',
+    id: 'custom-1',
+    code: [
+      "type LengthOfString<S extends Readonly<string>, L extends string[] = []> = S extends '' ? L['length'] : S extends `${infer First}${infer Last}` ? LengthOfString<Last, [First,...L]> : never;",
+      'type ReverseString<T extends string> = T extends `${infer First}${infer Rest}` ? `${ReverseString<Rest>}${First}` : T;',
+      "type CurFirst<T extends string> = T extends `${infer First}${infer Rest}` ? Rest : '';",
+      'type CurLast<T extends string> = ReverseString<CurFirst<ReverseString<T>>>;',
+      '',
+      'type FirstChar<T extends string> = T extends `${infer First}${infer Rest}` ?  First : T;',
+      'type LastChar<T extends string> = FirstChar<ReverseString<T>>;',
+      '',
+      "type ValidBracketImplement<T extends string, U extends string = ''> =",
+      '  LengthOfString<T> extends 0',
+      '    ? LengthOfString<U> extends 0',
+      '      ? true',
+      '      : false',
+      "    : FirstChar<T> extends ')'",
+      "      ? LastChar<U> extends '('",
+      '        ? ValidBracketImplement<CurFirst<T>,CurLast<U>>',
+      '        : false',
+      '      :ValidBracketImplement<CurFirst<T>, `${FirstChar<T>}${U}`>;',
+    ].join('\n'),
+    description:
+      '프로그래머스 문제 중 "올바른 괄호" 문제를 타입스크립트 만으로 풀어본 문제입니다.',
+    link: '',
+  },
+  {
+    title: 'MinusOne',
+    id: '02257',
+    code: [
+      'type MinusOne<T extends number> = T extends 0 ? -1 : ParsInt<RemoveLeadingZero<ReverseString<StringIntegerMinusOne<ReverseString<`${T}`>>>>>',
+      'type StringIntegerMinusOne<T extends string> = T extends `${infer First extends number}${infer Rest}` ?',
+      'First extends 0 ? `9${StringIntegerMinusOne<Rest>}` : `${[9,0,1,2,3,4,5,6,7,8][First]}${Rest}`',
+      ': never;',
+      'type ReverseString<S extends string> = S extends `${infer First}${infer Rest}` ? `${ReverseString<Rest>}${First}` : S;',
+      'type RemoveLeadingZero<S extends string> = S extends "0" ? S : S extends `0${infer Rest}` ? RemoveLeadingZero<Rest> : S;',
+      'type ParsInt<S extends string> = S extends `${infer Digit extends number}` ? Digit : never;',
+    ].join('\n'),
+    description: [
+      '해답을 봤다.',
+      '배열의 인덱스와 순서는 1 차이가 나는 점을 이용하여',
+      '계산을 하는 방식이며,',
+      '연산을 위해 문자열로 변환, 순서뒤집기 등의 과정이 포함되었다.',
+    ].join('\n'),
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/02257-medium-minusone/README.md',
+  },
+  {
+    title: 'Merge',
+    id: '00599',
+    code: [
+      'type Merge<F, S> = {',
+      '  [K in (keyof F)|(keyof S)] : K extends keyof F ? K extends keyof S ? S[K]: F[K] : K extends keyof S ? S[K] : never',
+      '}',
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00599-medium-merge/README.ko.md',
+  },
+  {
+    title: 'LengthOfString',
+    id: '00298',
+    code: "type LengthOfString<S extends Readonly<string>, L extends string[] = []> = S extends '' ? L['length'] : S extends `${infer First}${infer Last}` ? LengthOfString<Last, [First,...L]> : never;",
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00298-medium-length-of-string/README.ko.md',
+  },
+  {
+    title: 'LastOfArray',
+    id: '00015',
+    code: "type Last<T extends any[]> = T['length'] extends 0 ? never : T extends [infer First,...infer Rest] ? Rest['length'] extends 0 ? First : Last<Rest> : never;",
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00015-medium-last/README.ko.md',
+  },
+  {
+    title: 'Flatten',
+    id: '00459',
+    code: 'type Flatten<T extends any[]> = T extends [infer First, ...infer Rest] ? First extends any[] ? [...Flatten<First>, ...Flatten<Rest>]:[First, ...Flatten<Rest>]:T;',
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00459-medium-flatten/README.ko.md',
+  },
+  {
+    title: 'EndsWith',
+    id: '02693',
+    code: 'type EndsWith<T extends string, U extends string> = T extends `${infer First}${U}` ? true : false;',
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/02693-medium-endswith/README.md',
+  },
+  {
+    title: 'Diff',
+    id: '00645',
+    code: [
+      'type Diff<O, O1> = {',
+      '  [K in Exclude<(keyof O)|(keyof O1),((keyof O)&(keyof O1))>] : K extends keyof O ? O[K] : K extends keyof O1 ?  O1[K] : never;',
+      '}',
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00645-medium-diff/README.ko.md',
+  },
+  {
+    title: 'DeepReadonly',
+    id: '00009',
+    code: [
+      'type IsFunction<T> = T extends (..._:any[])=>any ? true : false;',
+      'type DeepReadonly<T extends object> = Readonly<{[K in keyof T]: T[K] extends string|boolean ? T[K] : IsFunction<T[K]> extends true ? T[K]: DeepReadonly<Readonly<T[K]>> }>',
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00009-medium-deep-readonly/README.ko.md',
+  },
+  {
+    title: 'Capitalize',
+    id: '00110',
+    code: 'type MyCapitalize<S extends string> = S extends `${infer First}${infer Rest}` ? `${Uppercase<First>}${Rest}` : Uppercase<S>',
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00110-medium-capitalize/README.ko.md',
+  },
+  {
+    title: 'BEM',
+    id: '03326',
+    code: [
+      'type BEM<B extends string, E extends string[], M extends string[]> =',
+      " E['length'] extends 0",
+      "   ? M['length'] extends 0",
+      '     ? `${B}`',
+      '     :`${B}--${M[number]}`',
+      " : M['length'] extends 0",
+      '   ? `${B}__${E[number]}`',
+      '   : `${B}__${E[number]}--${M[number]}`;',
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/03326-medium-bem-style-string/README.md',
+  },
+  {
+    title: 'AppendArgument',
+    id: '00191',
+    code: 'type AppendArgument<Fn extends (...args:any[])=>any, A> = Fn extends ((...args:(infer Args extends any[]))=>infer R) ? (..._:[...Args,A])=>R : never;',
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00191-medium-append-argument/README.ko.md',
+  },
+].map(({ code, ...rest }) => ({ ...rest, code: code.trim() }));
+
+export { myTSChallenges };
 
 export default myProjects;
