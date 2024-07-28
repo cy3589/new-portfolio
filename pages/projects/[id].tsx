@@ -6,14 +6,14 @@ import { useRouter } from 'next/router';
 
 import Layout from '@layouts/Layout';
 import { GetProjectFetcher } from '@fetchers/project';
-import { GetProject } from '@queries/project';
+import { useGetProject } from '@queries/project';
 import ProjectRender from '@components/projects/ProjectRender';
 import NotFound from '@pages/404';
 
 const Project: FC = () => {
   const router = useRouter();
   const id = router.query?.id as string;
-  const { data, isError, isLoading } = GetProject(id);
+  const { data, isError, isLoading } = useGetProject(id);
 
   const renderData = useMemo(() => {
     if (isLoading || isError || !data) {

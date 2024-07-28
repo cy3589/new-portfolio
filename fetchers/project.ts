@@ -27,4 +27,3 @@ const GetProjectsFetcher = async () => {
 // };
 
 export { GetProjectFetcher, GetProjectsFetcher };
-export default {};

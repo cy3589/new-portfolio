@@ -2,13 +2,13 @@ import { Container, Heading, SimpleGrid } from '@chakra-ui/react';
 import Layout from '@layouts/Layout';
 import { FC } from 'react';
 import GridProjectItem from '@components/projects/GridProjectItem';
-import { GetProjects } from '@queries/project';
+import { useGetProjects } from '@queries/project';
 import { GetStaticProps } from 'next';
 import { dehydrate, DehydratedState, QueryClient } from 'react-query';
 import { GetProjectsFetcher } from '@fetchers/project';
 
 const Projects: FC = () => {
-  const { data: myProjectsData } = GetProjects();
+  const { data: myProjectsData } = useGetProjects();
   const companyProjects = myProjectsData?.projects.filter(
     ({ isCompanyProject }) => isCompanyProject,
   );
