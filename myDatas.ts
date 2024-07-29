@@ -247,6 +247,24 @@ const myProjects: { [id: string]: Project } = {
 
 const myTSChallenges: TSChallenge[] = [
   {
+    title: 'CamelCase',
+    id: '00114',
+    code: [
+      "type Alphabet = 'a'|'b'|'c'|'d'|'e'|'f'|'g'|'h'|'i'|'j'|'k'|'l'|'m'|'n'|'o'|'p'|'q'|'r'|'s'|'t'|'u'|'v'|'w'|'x'|'y'|'z';",
+      'type CanTransToCamel = `_${Alphabet | Uppercase<Alphabet>}`',
+      '',
+      'type IsCanTransToCamel<S extends string> = S extends `_${infer First}${infer Rest}` ? `_${First}` extends CanTransToCamel ? true : false : false;',
+      'type TransToToCamel<S extends string>=IsCanTransToCamel<S> extends true ? S extends `_${infer First}${infer Rest}` ?  `${Uppercase<First>}${Rest}` : never : S;',
+      "type CamelCaseImplement<S extends string, U extends string = ''> = S['length'] extends 0 ? U:",
+      'IsCanTransToCamel<S> extends true ? TransToToCamel<S> extends `${infer First}${infer Rest}` ? CamelCaseImplement<Rest, `${U}${First}`> : U',
+      ': S extends `${infer First}${infer Rest}` ?  CamelCaseImplement<Rest, `${U}${Lowercase<First>}`> : U',
+      '',
+      'type CamelCase<S extends string> = CamelCaseImplement<S>',
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00114-hard-camelcase/README.md',
+  },
+  {
     title: 'PercentageParser',
     id: '01978',
     code: [
