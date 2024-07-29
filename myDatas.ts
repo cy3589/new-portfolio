@@ -247,6 +247,19 @@ const myProjects: { [id: string]: Project } = {
 
 const myTSChallenges: TSChallenge[] = [
   {
+    title: 'Pop',
+    id: '00016',
+    code: [
+      "type ReverseImplements<T extends any[], U extends any[] = []> = T['length'] extends 0 ? U :",
+      '      T extends [infer First, ...infer Rest] ? ReverseImplements<Rest, [First, ...U]> : never;',
+      'type Reverse<T extends any[]> = ReverseImplements<T>',
+      '',
+      'type Pop<T extends any[]> = Reverse<Reverse<T> extends [infer First, ...infer Rest] ? Rest : T>',
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00016-medium-pop/README.md',
+  },
+  {
     title: 'CamelCase',
     id: '00114',
     code: [
