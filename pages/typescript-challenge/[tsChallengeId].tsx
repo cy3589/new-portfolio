@@ -51,7 +51,7 @@ const TSChallenge: FC = () => {
               Link
             </Link>
           )}
-          <Box textAlign="left" mt="4">
+          <Box textAlign="left" mt="4" whiteSpace="pre-line" w="full">
             {data?.tsChallenge.description}
           </Box>
         </Flex>
