@@ -247,6 +247,33 @@ const myProjects: { [id: string]: Project } = {
 
 const myTSChallenges: TSChallenge[] = [
   {
+    title: 'Unbox',
+    id: '32427',
+    code: [
+      "type LengthOfString<S extends Readonly<string>, L extends string[] = []> = S extends '' ? L['length'] : S extends `${infer First}${infer Last}` ? LengthOfString<Last, [First,...L]> : never;",
+      "type Unbox<T, RecursionLevel extends number = 0, Recursions extends string = ''> =",
+      'RecursionLevel extends 0 ?',
+      'T extends (...args:infer A) => infer R ? Unbox<R> :',
+      'T extends Promise<infer R> ? Unbox<R> :',
+      'T extends Array<infer R> ? Unbox<R> : T',
+      ': RecursionLevel extends LengthOfString<Recursions> ? T : ',
+      'T extends (...args:infer A) => infer R ? Unbox<R, RecursionLevel, `${Recursions}0`> :',
+      'T extends Promise<infer R> ? Unbox<R, RecursionLevel, `${Recursions}0`> :',
+      'T extends Array<infer R> ? Unbox<R, RecursionLevel, `${Recursions}0`> : T',
+      '',
+      '',
+      "type Unbox<T, RecursionLevel extends number = 0, RecursionLevelRecorder extends ''[]=[]> =",
+      "RecursionLevel extends 0 ? Unbox<T, -1> : // RecursionLevel <-> RecursionLevelRecorder['length'] never matched -> Infinity Recursive(extends cases)",
+      "RecursionLevel extends RecursionLevelRecorder['length'] ? T : ",
+      "T extends (...args:infer Args) => infer R ? Unbox<R, RecursionLevel, [...RecursionLevelRecorder,'']> :",
+      "T extends Promise<infer R> ? Unbox<R, RecursionLevel, [...RecursionLevelRecorder,'']> :",
+      "T extends Array<infer R> ? Unbox<R, RecursionLevel, [...RecursionLevelRecorder,'']> : T",
+    ].join('\n'),
+    description:
+      '위에가 처음 풀이, 아래가 다른 정답과 비교하여 개선한 풀이이다.\n재귀 뎁스가 0인 경우 뎁스를 재설정하여 재귀를 태우는 로직이 추가되었고\n문자열의 길이 비교보다는 임의의 배열 길이로 뎁스를 체크하도록 개선',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/32427-hard-unbox/README.md',
+  },
+  {
     title: 'integers-comparator',
     id: '00274',
     code: [
