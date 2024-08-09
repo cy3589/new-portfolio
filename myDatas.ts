@@ -247,6 +247,20 @@ const myProjects: { [id: string]: Project } = {
 
 const myTSChallenges: TSChallenge[] = [
   {
+    title: 'RemoveIndexSignature',
+    id: '01367',
+    code: [
+      'type RemoveIndexSignatureImplements<T, P extends PropertyKey = PropertyKey> = { [K in keyof T as P extends K ? never : K extends P ? K : never]: T[K] };',
+      '// PropertyKey를 extends하는 P가 keyof T에 대응된다면 리터럴이 아니다 -> never',
+      '// keyof T에 해당하는 K가 PropertyKey를 extends하는 P의 확장이라면 T의 key이므로 K를 반환',
+      '// 리터럴이 아니고, T의 key도 아니라면 -> never',
+      '',
+      'type RemoveIndexSignature<T> = RemoveIndexSignatureImplements<T>;',
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/01367-medium-remove-index-signature/README.md',
+  },
+  {
     title: 'Unbox',
     id: '32427',
     code: [
