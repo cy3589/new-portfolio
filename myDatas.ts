@@ -247,6 +247,16 @@ const myProjects: { [id: string]: Project } = {
 
 const myTSChallenges: TSChallenge[] = [
   {
+    title: 'Absolute',
+    id: '00529',
+    code: [
+      'type RemoveNegative<T extends string> = T extends `-${infer Digit}` ? Digit : T;',
+      'type Absolute<T extends number | string | bigint> = RemoveNegative<`${T}`>',
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00529-medium-absolute/README.md',
+  },
+  {
     title: 'ReplaceAll',
     id: '00119',
     code: [
