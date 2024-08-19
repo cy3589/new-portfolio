@@ -247,6 +247,20 @@ const myProjects: { [id: string]: Project } = {
 
 const myTSChallenges: TSChallenge[] = [
   {
+    title: 'Replace',
+    id: '00116',
+    code: [
+      "type Replace<S extends string, From extends string, To extends string, U extends string = '', END extends boolean = false> =",
+      "  From extends '' ? S :",
+      '  END extends true ? `${U}${S}` :',
+      "  S['length'] extends 0 ? U :",
+      '  S extends `${From}${infer Rest}` ? Replace<Rest, From, To,`${U}${To}`, true> :',
+      '  S extends `${infer First}${infer Rest}` ? Replace<Rest, From, To,`${U}${First extends From ? From : First}`>: U;',
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00116-medium-replace/README.md',
+  },
+  {
     title: 'RemoveIndexSignature',
     id: '01367',
     code: [
