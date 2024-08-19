@@ -247,6 +247,17 @@ const myProjects: { [id: string]: Project } = {
 
 const myTSChallenges: TSChallenge[] = [
   {
+    title: 'EndsWith',
+    id: '02693',
+    code: [
+      "type ReverseString<T extends string, U extends string = ''> = T['length'] extends 0 ? U : T extends `${infer First}${infer Rest}` ? ReverseString<Rest, `${First}${U}`> : U;",
+      'type StartWith<T extends string, U extends string> = T extends `${U}${infer Rest}` ? true : false;',
+      'type EndsWith<T extends string, U extends string> = StartWith<ReverseString<T>,ReverseString<U>>;',
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/02693-medium-endswith/README.md',
+  },
+  {
     title: 'Absolute',
     id: '00529',
     code: [
