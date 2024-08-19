@@ -247,6 +247,20 @@ const myProjects: { [id: string]: Project } = {
 
 const myTSChallenges: TSChallenge[] = [
   {
+    title: 'ReplaceAll',
+    id: '00119',
+    code: [
+      "type ReplaceAll<S extends string, From extends string, To extends string, U extends string = '', END extends boolean = false> =",
+      "  From extends '' ? S :",
+      '  END extends true ? `${U}${S}` :',
+      "  S['length'] extends 0 ? U :",
+      '  S extends `${From}${infer Rest}` ? ReplaceAll<Rest, From, To,`${U}${To}`> :',
+      '  S extends `${infer First}${infer Rest}` ? ReplaceAll<Rest, From, To,`${U}${First extends From ? From : First}`>: U;',
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00119-medium-replaceall/README.md',
+  },
+  {
     title: 'Replace',
     id: '00116',
     code: [
