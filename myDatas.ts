@@ -247,6 +247,18 @@ const myProjects: { [id: string]: Project } = {
 
 const myTSChallenges: TSChallenge[] = [
   {
+    title: 'Trim Right',
+    id: '04803',
+    code: [
+      "type ReverseString<T extends string,U extends string=''>=T['length'] extends 0 ? U : T extends `${infer First}${infer Rest}`?ReverseString<Rest,`${First}${U}`>:U;",
+      "type TrimLeft<S extends string> = S extends `${[' ', '\n', '\t'][number]}${infer Rest}` ? TrimLeft<Rest> : S;",
+      '',
+      'type TrimRight<S extends string> = ReverseString<TrimLeft<ReverseString<S>>>;',
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/04803-medium-trim-right/README.md',
+  },
+  {
     title: 'EndsWith',
     id: '02693',
     code: [
