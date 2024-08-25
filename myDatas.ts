@@ -248,6 +248,15 @@ const myProjects: { [id: string]: Project } = {
 const myTSChallenges: TSChallenge[] = [
   {
     title: 'Drop Char',
+    id: '00018',
+    code: ["type Length<T extends Readonly<unknown[]>> = T['length'];"].join(
+      '\n',
+    ),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/00018-easy-tuple-length/README.md',
+  },
+  {
+    title: 'Drop Char',
     id: '02070',
     code: [
       "type DropCharImplements<S extends string, C extends string, U extends string = ''> =",
