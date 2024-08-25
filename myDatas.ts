@@ -247,6 +247,18 @@ const myProjects: { [id: string]: Project } = {
 
 const myTSChallenges: TSChallenge[] = [
   {
+    title: 'Drop Char',
+    id: '02070',
+    code: [
+      "type DropCharImplements<S extends string, C extends string, U extends string = ''> =",
+      "  S['length'] extends 0 ? U : ",
+      "  S extends `${infer First}${infer Rest}` ? DropCharImplements<Rest, C, `${U}${First extends C ? '' : First}`> : U",
+      'type DropChar<S extends string, C extends string> = DropCharImplements<S,C>',
+    ].join('\n'),
+    description: '',
+    link: 'https://github.com/type-challenges/type-challenges/blob/main/questions/02070-medium-drop-char/README.md',
+  },
+  {
     title: 'Trim Right',
     id: '04803',
     code: [
