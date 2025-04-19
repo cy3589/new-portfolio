@@ -247,7 +247,7 @@ const myProjects: { [id: string]: Project } = {
 
 const myTSChallenges: TSChallenge[] = [
   {
-    title: 'Drop Char',
+    title: 'Length of Tuple',
     id: '00018',
     code: ["type Length<T extends Readonly<unknown[]>> = T['length'];"].join(
       '\n',
