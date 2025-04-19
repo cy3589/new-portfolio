@@ -29,7 +29,8 @@ const myProjects: { [id: string]: Project } = {
     summary: '커머스 서비스 입니다.',
     description: '기업 Glyde에서 진행한 커머스 서비스의 웹 페이지 입니다.',
     whatILean: [
-      'Next.jd의 App Router 구조에 대한 사용법에 대해 자세히 알게되었습니다.',
+      'Next.js의 App Router 구조에 대한 사용법에 대해 자세히 알게되었습니다.',
+      'GTM을 통한 마케팅 집계 도구의 적용과 그 사용법에 대해 알게되었습니다.',
     ],
   },
   '1658051003913931': {
