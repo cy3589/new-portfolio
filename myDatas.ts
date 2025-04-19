@@ -3,6 +3,35 @@ import { TSChallenge } from '@typings/ts-challenge';
 import type { Project } from 'typings/project';
 
 const myProjects: { [id: string]: Project } = {
+  '1658051003913932': {
+    title: 'Glyde Commerce',
+    images: [
+      '/glyde-commerce/glyde-commerce-image0.jpg',
+      '/glyde-commerce/glyde-commerce-image1.jpg',
+      '/glyde-commerce/glyde-commerce-image2.jpg',
+      '/glyde-commerce/glyde-commerce-image3.jpg',
+    ],
+    isTeam: false,
+    isCompanyProject: true,
+    useSkills: {
+      front: [
+        'NextJS',
+        'Typescript',
+        'emotion',
+        'tailwindCSS',
+        'swiper',
+        'react-query',
+        'AWS Amplify',
+      ],
+    },
+    deploy: { link: 'https://glyde.co.kr' },
+    gitLink: '',
+    summary: '커머스 서비스 입니다.',
+    description: '기업 Glyde에서 진행한 커머스 서비스의 웹 페이지 입니다.',
+    whatILean: [
+      'Next.jd의 App Router 구조에 대한 사용법에 대해 자세히 알게되었습니다.',
+    ],
+  },
   '1658051003913931': {
     title: 'ClassU-B2B',
     images: ['/classu-b2b/classu-b2b-thumbnail.jpg'],

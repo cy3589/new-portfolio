@@ -3,6 +3,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const UserProjects: ProjectsPreview[] = [
   {
+    thumbNailSrc: '/glyde-commerce/glyde-commerce-thumbnail.jpg',
+    title: 'Glyde Commerce',
+    id: '1658051003913932',
+    isCompanyProject: true,
+  },
+  {
     thumbNailSrc: '/classu-b2b/classu-b2b-thumbnail.jpg',
     title: 'ClassU B2B',
     id: '1658051003913931',
